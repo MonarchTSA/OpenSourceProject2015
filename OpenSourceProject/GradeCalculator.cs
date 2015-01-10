@@ -28,6 +28,9 @@ namespace OpenSourceProject {
             double ptsPoss = 0, score = 0;
             DataGridView data = (DataGridView)sender;
             for (int i = 0; i < data.Rows.Count; i++) {
+                if (data.Rows[i].Cells[3].Value != null) {
+                    hasScores = true;
+                }
                 //Check to see if there is multiplier
                 if (data.Rows[i].Cells[1].Value != null)
                 {
@@ -41,7 +44,7 @@ namespace OpenSourceProject {
                     score += Convert.ToDouble(data.Rows[i].Cells[3].Value);
                 }
             }
-            if (ptsPoss != 0 ) { 
+            if (ptsPoss != 0 && hasScores) { 
                 //Update the final scores
                 labelPtsPoss.Text = ptsPoss.ToString();
                 labelScore.Text = score.ToString();
