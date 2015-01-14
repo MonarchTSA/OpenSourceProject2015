@@ -49,6 +49,8 @@
             this.labelScore = new System.Windows.Forms.Label();
             this.labelPtsPoss = new System.Windows.Forms.Label();
             this.labelPercent = new System.Windows.Forms.Label();
+            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
+            this.labelCategory = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.editCategory.SuspendLayout();
@@ -64,7 +66,7 @@
             this.ptsPoss,
             this.score,
             this.percent});
-            this.dataGridView1.Location = new System.Drawing.Point(28, 37);
+            this.dataGridView1.Location = new System.Drawing.Point(28, 85);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(542, 150);
             this.dataGridView1.TabIndex = 0;
@@ -166,7 +168,7 @@
             this.groupBox1.Controls.Add(this.labelScore);
             this.groupBox1.Controls.Add(this.labelPtsPoss);
             this.groupBox1.Controls.Add(this.labelPercent);
-            this.groupBox1.Location = new System.Drawing.Point(271, 196);
+            this.groupBox1.Location = new System.Drawing.Point(271, 247);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(299, 39);
             this.groupBox1.TabIndex = 3;
@@ -215,11 +217,35 @@
             this.labelPercent.TabIndex = 2;
             this.labelPercent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // comboBoxCategory
+            // 
+            this.comboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCategory.FormattingEnabled = true;
+            this.comboBoxCategory.Items.AddRange(new object[] {
+            "Create new category",
+            "your mom"});
+            this.comboBoxCategory.Location = new System.Drawing.Point(84, 258);
+            this.comboBoxCategory.Name = "comboBoxCategory";
+            this.comboBoxCategory.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCategory.TabIndex = 4;
+            this.comboBoxCategory.TextChanged += new System.EventHandler(this.onCategoryChange);
+            // 
+            // labelCategory
+            // 
+            this.labelCategory.AutoSize = true;
+            this.labelCategory.Location = new System.Drawing.Point(30, 262);
+            this.labelCategory.Name = "labelCategory";
+            this.labelCategory.Size = new System.Drawing.Size(49, 13);
+            this.labelCategory.TabIndex = 5;
+            this.labelCategory.Text = "Category";
+            // 
             // GradeCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 252);
+            this.ClientSize = new System.Drawing.Size(620, 298);
+            this.Controls.Add(this.labelCategory);
+            this.Controls.Add(this.comboBoxCategory);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
@@ -259,6 +285,8 @@
         private System.Windows.Forms.Label labelPercent;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.Label labelPtsPoss;
+        private System.Windows.Forms.ComboBox comboBoxCategory;
+        private System.Windows.Forms.Label labelCategory;
     }
 }
 

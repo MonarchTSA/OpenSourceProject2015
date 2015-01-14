@@ -11,6 +11,8 @@ using System.Windows.Forms;
 namespace OpenSourceProject {
     public partial class GradeCalculator : Form {
 
+        SchoolClass schoolClass = new SchoolClass("everything");
+
         public GradeCalculator()
         {
             InitializeComponent();
@@ -18,9 +20,13 @@ namespace OpenSourceProject {
 
 
         private void onEndCellEdit(object sender, DataGridViewCellEventArgs e) {
-            validateEntry(sender, e);
-            calculatePercentage(sender, e);
-            calculateTotals(sender, e);
+            schoolClass.data = (DataGridView)sender;
+            schoolClass.validateEntry(e);
+            schoolClass.calculatePercentage(e);
+            schoolClass.calculateTotals(e, ref labelPtsPoss, ref labelScore, ref labelPercent);
+            //validateEntry(sender, e);
+            //calculatePercentage(sender, e);
+            //calculateTotals(sender, e);
         }
 
         private void calculateTotals(object sender, DataGridViewCellEventArgs e) {
@@ -92,6 +98,20 @@ namespace OpenSourceProject {
                 if (Convert.ToDouble(data.Rows[e.RowIndex].Cells[2].Value) != 0) {
                     data.Rows[e.RowIndex].Cells[4].Value = Convert.ToDouble(data.Rows[e.RowIndex].Cells[3].Value) / Convert.ToDouble(data.Rows[e.RowIndex].Cells[2].Value) * 100;
                 }
+            }
+        }
+
+        private void onCategoryChange(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            if (comboBox.Text == "Create new category") 
+            {
+                MessageBox.Show("changed");
+                
+            }
+            else
+            {
+                //load comboBox.Items.indexOf(comboBox.Text)
             }
         }
     }
