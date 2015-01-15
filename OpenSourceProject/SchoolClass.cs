@@ -10,6 +10,52 @@ namespace OpenSourceProject
     class SchoolClass
     {
         public string name { get; set; }
+        public double ptsPoss 
+        {
+            get
+            {
+                double sum = -1;
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    if (data.Rows[i].Cells[2].Value != null)
+                    {
+                        if (sum == -1)
+                        {
+                            sum++;
+                        }
+                        sum += Convert.ToDouble(data.Rows[i].Cells[2].Value);
+                    }
+                }
+                return sum;
+            }
+            set
+            {
+                ptsPoss = value;
+            } 
+        }
+        public double score 
+        {
+            get
+            {
+                double sum = -1;
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    if (data.Rows[i].Cells[3].Value != null)
+                    {
+                        if (sum == -1)
+                        {
+                            sum++;
+                        }
+                        sum += Convert.ToDouble(data.Rows[i].Cells[3].Value);
+                    }
+                }
+                return sum;
+            }
+            set
+            {
+                score = value;
+            }
+        }
         public DataGridView data { get; set; }
 
         public SchoolClass(string name)
@@ -20,31 +66,32 @@ namespace OpenSourceProject
 
         public char getLetterGrade()
         {
-            double percent = score / ptsPoss;
-            if (percent == null)
+            if (score == -1 || ptsPoss == -1)
             {
                 return ' ';
+            } else {
+                double percent = score / ptsPoss * 100;
+                if (percent >= 90.0)
+                {
+                    return 'A';
+                }
+                else if (percent >= 80.0)
+                {
+                    return 'B';
+                }
+                else if (percent >= 70.0)
+                {
+                    return 'C';
+                }
+                else if (percent >= 60.0)
+                {
+                    return 'D';
+                }
+                else
+                {
+                    return 'F';
+                }        
             }
-            else if (percent >= 90d)
-            {
-                return 'A';
-            }
-            else if (percent >= 80d)
-            {
-                return 'B';
-            }
-            else if (percent >= 70d)
-            {
-                return 'C';
-            }
-            else if (percent >= 60d)
-            {
-                return 'D';
-            }
-            else
-            {
-                return 'F';
-            }        
         }
 
         public void calculateTotals(DataGridViewCellEventArgs e, ref Label labelPtsPoss, ref Label labelScore, ref Label labelPercent)
