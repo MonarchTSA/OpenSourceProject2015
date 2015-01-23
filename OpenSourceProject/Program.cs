@@ -16,7 +16,7 @@ namespace OpenSourceProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GradeCalculator());
+            Application.Run(new FormMain());
         }
     }
 }

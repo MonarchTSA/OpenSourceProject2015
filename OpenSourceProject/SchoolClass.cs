@@ -9,180 +9,70 @@ namespace OpenSourceProject
 {
     class SchoolClass
     {
-        public string name { get; set; }
-        public double ptsPoss 
+        //The name of the class
+        public string Name { get; set; }
+
+        //The grade/percent of the class
+        public double Percent 
         {
             get
             {
-                double sum = -1;
-                for (int i = 0; i < data.Rows.Count; i++)
+                double percent = 0;
+                foreach (Category c in CategoryList)
                 {
-                    if (data.Rows[i].Cells[2].Value != null)
-                    {
-                        if (sum == -1)
-                        {
-                            sum++;
-                        }
-                        sum += Convert.ToDouble(data.Rows[i].Cells[2].Value);
-                    }
+                    //Multiply the current category's percent  time its weigh divided by 100 and add it to the percent;
+                    percent += (c.Percent * (c.Weight / 100));
                 }
-                return sum;
+                return percent;
             }
-            set
-            {
-                ptsPoss = value;
-            } 
         }
-        public double score 
+
+        public char LetterGrade
         {
             get
             {
-                double sum = -1;
-                for (int i = 0; i < data.Rows.Count; i++)
-                {
-                    if (data.Rows[i].Cells[3].Value != null)
-                    {
-                        if (sum == -1)
-                        {
-                            sum++;
-                        }
-                        sum += Convert.ToDouble(data.Rows[i].Cells[3].Value);
-                    }
-                }
-                return sum;
-            }
-            set
-            {
-                score = value;
-            }
-        }
-        public DataGridView data { get; set; }
-
-        public SchoolClass(string name)
-        {
-            data = new DataGridView();
-            this.name = name;
-        }
-
-        public char getLetterGrade()
-        {
-            if (score == -1 || ptsPoss == -1)
-            {
-                return ' ';
-            } else {
-                double percent = score / ptsPoss * 100;
-                if (percent >= 90.0)
+                if (Percent >= 90)
                 {
                     return 'A';
                 }
-                else if (percent >= 80.0)
+                else if (Percent >= 80)
                 {
                     return 'B';
                 }
-                else if (percent >= 70.0)
+                else if (Percent >= 70)
                 {
                     return 'C';
                 }
-                else if (percent >= 60.0)
+                else if (Percent >= 60)
                 {
                     return 'D';
                 }
                 else
                 {
                     return 'F';
-                }        
-            }
-        }
-
-        public void calculateTotals(DataGridViewCellEventArgs e, ref Label labelPtsPoss, ref Label labelScore, ref Label labelPercent)
-        {
-            bool hasScores = false;
-            double ptsPoss = 0, score = 0;
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                if (data.Rows[i].Cells[3].Value != null)
-                {
-                    hasScores = true;
-                }
-                //Check to see if there is multiplier
-                if (data.Rows[i].Cells[1].Value != null)
-                {
-                    //Update with the multiplier
-                    ptsPoss += Convert.ToDouble(data.Rows[i].Cells[2].Value) * Convert.ToDouble(data.Rows[i].Cells[1].Value);
-                    score += Convert.ToDouble(data.Rows[i].Cells[3].Value) * Convert.ToDouble(data.Rows[i].Cells[1].Value);
-                }
-                else
-                {
-                    //Update without the multiplier (multiplier of 1)
-                    ptsPoss += Convert.ToDouble(data.Rows[i].Cells[2].Value);
-                    score += Convert.ToDouble(data.Rows[i].Cells[3].Value);
-                }
-            }
-            if (ptsPoss != 0 && hasScores)
-            {
-                //Update the final scores
-                labelPtsPoss.Text = ptsPoss.ToString();
-                labelScore.Text = score.ToString();
-                labelPercent.Text = (score / ptsPoss * 100).ToString() + "%";
-            }
-        }
-
-        public void validateEntry(DataGridViewCellEventArgs e)
-        {
-            //Check if the user is in any other column other than the first
-            if (data.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                if (e.ColumnIndex != 0)
-                {
-                    //Check if the user is entering anything other than 0-9 or a "."
-                    if (System.Text.RegularExpressions.Regex.IsMatch(data.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), "[^0-9.]"))
-                    {
-                        //Delete the cell
-                        data.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = null;
-                        bool rowIsEmpty = true;
-                        //Check to see if the row is empty, if it is delete the row, otherwise don't
-                        foreach (DataGridViewCell cell in data.Rows[e.RowIndex].Cells)
-                        {
-                            if (cell.Value != null)
-                            {
-                                rowIsEmpty = false;
-                                break;
-                            }
-                        }
-                        if (rowIsEmpty)
-                        {
-                            data.Rows.Remove(data.Rows[e.RowIndex]);
-                        }
-                        MessageBox.Show("Please enter only numbers.");
-                    }
                 }
             }
         }
 
-        public void calculatePercentage(DataGridViewCellEventArgs e)
+        //The list of all the categories
+        public List<Category> CategoryList { get; set; }
+
+        //The index of the currently selected category
+        public int CurrentCategoryIndex { get; set; }
+
+        //Returns the category from categoryList[currentCategoryIndex] (read-only)
+        public Category CurrentCategory 
         {
-            //Check if ptsposs or score isn't empty
-            if (data.Rows[e.RowIndex].Cells[2].Value != null && data.Rows[e.RowIndex].Cells[3].Value != null)
+            get
             {
-                //If the ptsposs is not zero, update the table (this prevents division by 0)
-                if (Convert.ToDouble(data.Rows[e.RowIndex].Cells[2].Value) != 0)
-                {
-                    data.Rows[e.RowIndex].Cells[4].Value = Convert.ToDouble(data.Rows[e.RowIndex].Cells[3].Value) / Convert.ToDouble(data.Rows[e.RowIndex].Cells[2].Value) * 100;
-                }
+                return CategoryList[CurrentCategoryIndex];
             }
         }
 
-        public void onCategoryChange(ComboBox comboBox, EventArgs e)
+        public SchoolClass(string name)
         {
-            if (comboBox.Text == "Create new category")
-            {
-                MessageBox.Show("changed");
-
-            }
-            else
-            {
-                //load comboBox.Items.indexOf(comboBox.Text)
-            }
+            Name = name;
+            CategoryList = new List<Category>();
         }
     }
 }

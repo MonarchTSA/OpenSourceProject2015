@@ -44,6 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assignment.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="FormEnterCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEnterCategory.Designer.cs">
+      <DependentUpon>FormEnterCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="GradeCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,12 +61,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolClass.cs" />
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="FormEnterCategory.resx">
+      <DependentUpon>FormEnterCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GradeCalculator.resx">
       <DependentUpon>GradeCalculator.cs</DependentUpon>
     </EmbeddedResource>
@@ -71,9 +76,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="Properties\DataSources\ClassData.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

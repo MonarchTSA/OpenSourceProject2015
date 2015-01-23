@@ -1,6 +1,6 @@
 ﻿namespace OpenSourceProject
 {
-    partial class GradeCalculator
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,54 +51,56 @@
             this.labelPercent = new System.Windows.Forms.Label();
             this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.labelCategory = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.editCategory.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.multiplier,
             this.ptsPoss,
             this.score,
             this.percent});
-            this.dataGridView1.Location = new System.Drawing.Point(28, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(542, 150);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.onEndCellEdit);
+            this.dataGridView.Location = new System.Drawing.Point(24, 88);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.Size = new System.Drawing.Size(573, 150);
+            this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnEndCellEdit);
+            this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.onDeleteRow);
             // 
             // name
             // 
-            this.name.Frozen = true;
             this.name.HeaderText = "Name";
             this.name.Name = "name";
             // 
             // multiplier
             // 
-            this.multiplier.Frozen = true;
             this.multiplier.HeaderText = "Multiplier";
             this.multiplier.Name = "multiplier";
             // 
             // ptsPoss
             // 
-            this.ptsPoss.Frozen = true;
             this.ptsPoss.HeaderText = "PtsPoss";
             this.ptsPoss.Name = "ptsPoss";
             // 
             // score
             // 
-            this.score.Frozen = true;
             this.score.HeaderText = "Score";
             this.score.Name = "score";
             // 
             // percent
             // 
-            this.percent.Frozen = true;
             this.percent.HeaderText = "Percent";
             this.percent.Name = "percent";
             this.percent.ReadOnly = true;
@@ -163,12 +165,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.divider2);
             this.groupBox1.Controls.Add(this.divider1);
             this.groupBox1.Controls.Add(this.labelScore);
             this.groupBox1.Controls.Add(this.labelPtsPoss);
             this.groupBox1.Controls.Add(this.labelPercent);
-            this.groupBox1.Location = new System.Drawing.Point(271, 247);
+            this.groupBox1.Location = new System.Drawing.Point(298, 247);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(299, 39);
             this.groupBox1.TabIndex = 3;
@@ -219,21 +222,22 @@
             // 
             // comboBoxCategory
             // 
+            this.comboBoxCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategory.FormattingEnabled = true;
             this.comboBoxCategory.Items.AddRange(new object[] {
-            "Create new category",
-            "your mom"});
-            this.comboBoxCategory.Location = new System.Drawing.Point(84, 258);
+            "Create new category"});
+            this.comboBoxCategory.Location = new System.Drawing.Point(75, 259);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCategory.TabIndex = 4;
-            this.comboBoxCategory.TextChanged += new System.EventHandler(this.onCategoryChange);
+            this.comboBoxCategory.SelectionChangeCommitted += new System.EventHandler(this.OnCategoryChange);
             // 
             // labelCategory
             // 
+            this.labelCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCategory.AutoSize = true;
-            this.labelCategory.Location = new System.Drawing.Point(30, 262);
+            this.labelCategory.Location = new System.Drawing.Point(21, 263);
             this.labelCategory.Name = "labelCategory";
             this.labelCategory.Size = new System.Drawing.Size(49, 13);
             this.labelCategory.TabIndex = 5;
@@ -247,12 +251,13 @@
             this.Controls.Add(this.labelCategory);
             this.Controls.Add(this.comboBoxCategory);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(636, 337);
             this.Name = "GradeCalculator";
             this.Text = "Grade Calculator";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.editCategory.ResumeLayout(false);
@@ -265,12 +270,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn multiplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ptsPoss;
-        private System.Windows.Forms.DataGridViewTextBoxColumn score;
-        private System.Windows.Forms.DataGridViewTextBoxColumn percent;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -286,6 +286,11 @@
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.Label labelPtsPoss;
         private System.Windows.Forms.ComboBox comboBoxCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn multiplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ptsPoss;
+        private System.Windows.Forms.DataGridViewTextBoxColumn score;
+        private System.Windows.Forms.DataGridViewTextBoxColumn percent;
         private System.Windows.Forms.Label labelCategory;
     }
 }
