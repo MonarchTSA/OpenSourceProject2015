@@ -60,11 +60,11 @@
             // labelPickPercent
             // 
             this.labelPickPercent.AutoSize = true;
-            this.labelPickPercent.Location = new System.Drawing.Point(9, 68);
+            this.labelPickPercent.Location = new System.Drawing.Point(12, 68);
             this.labelPickPercent.Name = "labelPickPercent";
-            this.labelPickPercent.Size = new System.Drawing.Size(160, 13);
+            this.labelPickPercent.Size = new System.Drawing.Size(155, 13);
             this.labelPickPercent.TabIndex = 9;
-            this.labelPickPercent.Text = "Enter a percent for the category:";
+            this.labelPickPercent.Text = "Enter a weight for the category:";
             // 
             // numericUpDownPercent
             // 

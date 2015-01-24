@@ -20,7 +20,8 @@ namespace OpenSourceProject
                 double sum = 0;
                 foreach (Assignment a in AssignmentList)
                 {
-                    if (!(a.Score < 0) && !(a.PtsPoss < 0))
+                    //If the assignment doesn't have the default value for ptsposs
+                    if (!(a.PtsPoss < 0) && !(a.Score < 0))
                     {
                         sum += a.PtsPoss;
                     }
@@ -37,10 +38,7 @@ namespace OpenSourceProject
                 double sum = 0;
                 foreach (Assignment a in AssignmentList)
                 {
-                    if (!(a.Score < 0) && !(a.PtsPoss < 0))
-                    {
-                        sum += a.Score;
-                    }
+                    sum += a.Score;
                 }
                 return sum;
             }

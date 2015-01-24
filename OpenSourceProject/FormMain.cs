@@ -22,28 +22,21 @@ namespace OpenSourceProject {
 
         //This method is fired once the user is done editing a cell
         private void OnEndCellEdit(object sender, DataGridViewCellEventArgs e)
+       { 
+            //Validate entry
+            if (ValidateEntry(e))
             {
-            //TODO: make the datagridview disabled if no categories exit
-            //Check if there are any categories
-            if (SchoolClass.CategoryList.Count == 0)
-            {
-                //Remove the the data they put in the table
-                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = null;
-                dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
-                MessageBox.Show("No category is created. Please create one first");
-            }
-            else
-            {
-                //Validate entry
-                if (ValidateEntry(e))
-                {
-                    //Add the data on the datagridview to to the current category
-                    StoreData();
-                    //Update assigment percentage
-                    UpdateAssignmentPercentages(e);
-                    //Update totals
-                    UpdateTotals();
-                }
+                //Add the data on the datagridview to to the current category
+                StoreData();
+
+                //Update assigment percentage
+                UpdateAssignmentPercentages(e);
+
+                //Update totals
+                UpdateTotals();
+
+                //Update grade
+                UpdateGrade();
             }
         }
 
@@ -70,7 +63,26 @@ namespace OpenSourceProject {
 
                     //Set the currentCategoryIndex to the last index
                     SchoolClass.CurrentCategoryIndex = SchoolClass.CategoryList.Count - 1;
+                    if (dataGridView.Enabled == false)
+                    {
+                        dataGridView.Enabled = true;
+                    }
 
+                    //Set the comboBox text to the new currentCategory's name
+                    comboBoxCategory.Text = SchoolClass.CurrentCategory.Name;
+
+                    //Load the data
+                    LoadData();
+
+                    //Store the data
+                    StoreData();
+                    
+                    //Update the totals
+                    UpdateTotals();
+                    
+                    //Update the grade
+                    UpdateGrade();
+                
                 }
             }
 
@@ -78,11 +90,28 @@ namespace OpenSourceProject {
             else
             {
                 SchoolClass.CurrentCategoryIndex = comboBoxCategory.SelectedIndex - 1;
+                
+                //Load the data
+                LoadData();
+
+                //Store the data
+                StoreData();
+
+                //Update the totals
+                UpdateTotals();
+
+                //Update the grade
+                UpdateGrade();
             }
 
-            //Set the comboBox text to the new currentCategory's name
-            comboBoxCategory.Text = SchoolClass.CurrentCategory.Name;
 
+
+
+            
+        }
+
+        private void LoadData()
+        {
             //Update the DataGridView
             dataGridView.Rows.Clear();
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -97,17 +126,12 @@ namespace OpenSourceProject {
                 }
                 rows.Add(row);
             }
-            
+
             //Add all the rows
             for (int i = 0; i < rows.Count; i++)
             {
                 dataGridView.Rows.Add(rows[i]);
             }
-            //Store the data
-            StoreData();
-
-            //Update the totals
-            UpdateTotals();
         }
 
         //This method take the data from the datagrid view and stores it in schoolclass.currentcategory.assignmentlist
@@ -177,7 +201,7 @@ namespace OpenSourceProject {
                         }
                         if (rowIsEmpty)
                         {
-                            dataGridView.Rows.RemoveAt(e.RowIndex + 1);
+                            dataGridView.Rows.RemoveAt(e.RowIndex);
                         }
                         MessageBox.Show("Please enter only numbers.");
                         return false;
@@ -222,14 +246,41 @@ namespace OpenSourceProject {
                 labelScore.Text = "";
                 labelPercent.Text = "";
             }
+            groupBoxTotals.Text = SchoolClass.CurrentCategory.Name + " Totals (" + SchoolClass.CurrentCategory.Weight + "%)";
         }
 
         //This method is fired when a user deletes a row
-        private void onDeleteRow(object sender, DataGridViewRowEventArgs e)
+        private void OnDeleteRow(object sender, DataGridViewRowEventArgs e)
         {
             StoreData();
             UpdateTotals();
+            UpdateGrade();
         }
 
+        //This method is fired when the datagridview is clicked
+        private void OnClick(object sender, EventArgs e)
+        {
+            var p = PointToClient(Cursor.Position);
+            var c = GetChildAtPoint(p);
+            if (c != null && c.Enabled == false)
+            {
+                MessageBox.Show("No category is created. Please create one first");
+            }
+        }
+
+        //This method updates the grade groupbox text
+        private void UpdateGrade()
+        {
+            if (!double.IsNaN(SchoolClass.Percent))
+            {
+                labelLetterGrade.Text = "" + SchoolClass.LetterGrade;
+                labelGrade.Text = SchoolClass.Percent + "%";
+            }
+            else
+            {
+                labelLetterGrade.Text = "";
+                labelGrade.Text = "";
+            }
+        }
     }
 }

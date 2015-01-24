@@ -52,11 +52,11 @@
     <Compile Include="FormEnterCategory.Designer.cs">
       <DependentUpon>FormEnterCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="GradeCalculator.cs">
+    <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GradeCalculator.Designer.cs">
-      <DependentUpon>GradeCalculator.cs</DependentUpon>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,8 +64,8 @@
     <EmbeddedResource Include="FormEnterCategory.resx">
       <DependentUpon>FormEnterCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GradeCalculator.resx">
-      <DependentUpon>GradeCalculator.cs</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

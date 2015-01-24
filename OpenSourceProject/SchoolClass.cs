@@ -17,11 +17,22 @@ namespace OpenSourceProject
         {
             get
             {
+                if (CategoryList.Count == 1)
+                {
+                    return CurrentCategory.Percent;
+                }
                 double percent = 0;
+                double remainingPercent = 100;
                 foreach (Category c in CategoryList)
                 {
                     //Multiply the current category's percent  time its weigh divided by 100 and add it to the percent;
                     percent += (c.Percent * (c.Weight / 100));
+
+                    remainingPercent -= c.Weight;
+                }
+                if (remainingPercent != 0)
+                {
+                    percent += remainingPercent;
                 }
                 return percent;
             }
