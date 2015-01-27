@@ -19,7 +19,7 @@ namespace OpenSourceProject
             get
             {
                 //If the total weight does not add up to 100, then find the multiplier than makes the weight sum = 100.
-                //Then multiply the weight of the category by the multiplier to get the new weight.
+                //Then multiply the weight of the category 
                 double weightSum = 0;
                 foreach (Category c in CategoryList)
                 {
