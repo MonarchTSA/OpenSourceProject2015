@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,11 +54,6 @@
             this.labelGrade = new System.Windows.Forms.Label();
             this.labelLetterGrade = new System.Windows.Forms.Label();
             this.divider3 = new System.Windows.Forms.Label();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.groupBoxTotals.SuspendLayout();
@@ -83,6 +83,32 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEndEdit);
             this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnDeleteRow);
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Assignment Name";
+            this.name.Name = "name";
+            // 
+            // multiplier
+            // 
+            this.multiplier.HeaderText = "Multiplier";
+            this.multiplier.Name = "multiplier";
+            // 
+            // ptsPoss
+            // 
+            this.ptsPoss.HeaderText = "PtsPoss";
+            this.ptsPoss.Name = "ptsPoss";
+            // 
+            // score
+            // 
+            this.score.HeaderText = "Score";
+            this.score.Name = "score";
+            // 
+            // percent
+            // 
+            this.percent.HeaderText = "Percent";
+            this.percent.Name = "percent";
+            this.percent.ReadOnly = true;
             // 
             // menuStrip
             // 
@@ -272,32 +298,6 @@
             this.divider3.Size = new System.Drawing.Size(2, 15);
             this.divider3.TabIndex = 5;
             // 
-            // name
-            // 
-            this.name.HeaderText = "Assignment Name";
-            this.name.Name = "name";
-            // 
-            // multiplier
-            // 
-            this.multiplier.HeaderText = "Multiplier";
-            this.multiplier.Name = "multiplier";
-            // 
-            // ptsPoss
-            // 
-            this.ptsPoss.HeaderText = "PtsPoss";
-            this.ptsPoss.Name = "ptsPoss";
-            // 
-            // score
-            // 
-            this.score.HeaderText = "Score";
-            this.score.Name = "score";
-            // 
-            // percent
-            // 
-            this.percent.HeaderText = "Percent";
-            this.percent.Name = "percent";
-            this.percent.ReadOnly = true;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,7 +312,7 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(636, 337);
+            this.MinimumSize = new System.Drawing.Size(641, 337);
             this.Name = "FormMain";
             this.Text = "Grade Calculator";
             this.Click += new System.EventHandler(this.OnClick);
