@@ -62,12 +62,12 @@ namespace OpenSourceProject
         }
 
         //The weight of the category
-        public double Weight { get; set; }
+        public int Weight { get; set; }
 
         //List of all the assignments
         public List<Assignment> AssignmentList { get; set; }
 
-        public Category(string name, double weight) {
+        public Category(string name, int weight) {
             this.Name = name;
             this.Weight = weight;
             AssignmentList = new List<Assignment>();

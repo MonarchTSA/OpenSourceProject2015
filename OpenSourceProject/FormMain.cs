@@ -67,47 +67,58 @@ namespace OpenSourceProject
             //If the option selected is the first index, a new category is created.
             if (comboBoxCategory.SelectedIndex == 0)
             {
-                //Deselect text
-                comboBoxCategory.SelectedIndex = -1;
-                //Open up category selection form
-                FormEnterCategory formEnterCatgory = new FormEnterCategory(100);
-                if (formEnterCatgory.ShowDialog() == DialogResult.OK)
+                if (CurrentClass.remainingWeight == 0)
                 {
-                    //Create the category
-                    Category category = new Category(formEnterCatgory.data[0].ToString(), Convert.ToDouble(formEnterCatgory.data[1]));
-
-                    //Add it to the categoryList
-                    CurrentClass.CategoryList.Add(category);
-
-                    //Add it to the comboBoxCategory
-                    comboBoxCategory.Items.Add(category.Name);
-
-                    //Set the currentCategoryIndex to the last index
-                    CurrentClass.CurrentCategoryIndex = CurrentClass.CategoryList.Count - 1;
-                    if (dataGridView.Enabled == false)
-                    {
-                        dataGridView.Enabled = true;
-                    }
-
-                    //Set the comboBox text to the new currentCategory's name
                     comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
-
-                    //Load the data
-                    LoadData();
-
-                    //Store the data
-                    StoreData();
-                    
-                    //Update the totals
-                    UpdateTotals();
-                    
-                    //Update the grade
-                    UpdateGrade();
+                    SystemSounds.Asterisk.Play();
+                    MessageBox.Show("Class is full!");
                 }
-                else if (CurrentClass.CategoryList.Count != 0)
+                else
                 {
-                    comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(CurrentClass.CurrentCategory.Name);
+                    //Deselect text
+                    comboBoxCategory.SelectedIndex = -1;
+                    //Open up category selection form
+                    FormEnterCategory formEnterCatgory = new FormEnterCategory(CurrentClass.remainingWeight);
+                    if (formEnterCatgory.ShowDialog() == DialogResult.OK)
+                    {
+                        //Create the category
+                        Category category = new Category(formEnterCatgory.data[0].ToString(), Convert.ToInt32(formEnterCatgory.data[1]));
+                        CurrentClass.remainingWeight -= Convert.ToInt32(formEnterCatgory.data[1]);
+
+                        //Add it to the categoryList
+                        CurrentClass.CategoryList.Add(category);
+
+                        //Add it to the comboBoxCategory
+                        comboBoxCategory.Items.Add(category.Name);
+
+                        //Set the currentCategoryIndex to the last index
+                        CurrentClass.CurrentCategoryIndex = CurrentClass.CategoryList.Count - 1;
+                        if (dataGridView.Enabled == false)
+                        {
+                            dataGridView.Enabled = true;
+                        }
+
+                        //Set the comboBox text to the new currentCategory's name
+                        comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
+
+                        //Load the data
+                        LoadData();
+
+                        //Store the data
+                        StoreData();
+
+                        //Update the totals
+                        UpdateTotals();
+
+                        //Update the grade
+                        UpdateGrade();
+                    }
+                    else if (CurrentClass.CategoryList.Count != 0)
+                    {
+                        comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(CurrentClass.CurrentCategory.Name);
+                    }
                 }
+                
             }
 
             //Else, set the currentCategoryIndex to the index of the selected option minus one

@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +49,11 @@
             this.labelGrade = new System.Windows.Forms.Label();
             this.labelLetterGrade = new System.Windows.Forms.Label();
             this.divider3 = new System.Windows.Forms.Label();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.groupBoxTotals.SuspendLayout();
@@ -63,6 +63,7 @@
             // dataGridView
             // 
             this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -78,36 +79,10 @@
             this.dataGridView.Location = new System.Drawing.Point(24, 85);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
-            this.dataGridView.Size = new System.Drawing.Size(573, 150);
+            this.dataGridView.Size = new System.Drawing.Size(578, 150);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEndEdit);
             this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnDeleteRow);
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            // 
-            // multiplier
-            // 
-            this.multiplier.HeaderText = "Multiplier";
-            this.multiplier.Name = "multiplier";
-            // 
-            // ptsPoss
-            // 
-            this.ptsPoss.HeaderText = "PtsPoss";
-            this.ptsPoss.Name = "ptsPoss";
-            // 
-            // score
-            // 
-            this.score.HeaderText = "Score";
-            this.score.Name = "score";
-            // 
-            // percent
-            // 
-            this.percent.HeaderText = "Percent";
-            this.percent.Name = "percent";
-            this.percent.ReadOnly = true;
             // 
             // menuStrip
             // 
@@ -117,7 +92,7 @@
             this.calculateToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(620, 24);
+            this.menuStrip.Size = new System.Drawing.Size(625, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -165,7 +140,7 @@
             this.groupBoxTotals.Controls.Add(this.labelScore);
             this.groupBoxTotals.Controls.Add(this.labelPtsPoss);
             this.groupBoxTotals.Controls.Add(this.labelPercent);
-            this.groupBoxTotals.Location = new System.Drawing.Point(298, 244);
+            this.groupBoxTotals.Location = new System.Drawing.Point(303, 244);
             this.groupBoxTotals.Name = "groupBoxTotals";
             this.groupBoxTotals.Size = new System.Drawing.Size(299, 39);
             this.groupBoxTotals.TabIndex = 3;
@@ -265,7 +240,7 @@
             this.groupBoxGrade.Controls.Add(this.labelGrade);
             this.groupBoxGrade.Controls.Add(this.labelLetterGrade);
             this.groupBoxGrade.Controls.Add(this.divider3);
-            this.groupBoxGrade.Location = new System.Drawing.Point(399, 33);
+            this.groupBoxGrade.Location = new System.Drawing.Point(404, 33);
             this.groupBoxGrade.Name = "groupBoxGrade";
             this.groupBoxGrade.Size = new System.Drawing.Size(192, 39);
             this.groupBoxGrade.TabIndex = 9;
@@ -297,11 +272,37 @@
             this.divider3.Size = new System.Drawing.Size(2, 15);
             this.divider3.TabIndex = 5;
             // 
+            // name
+            // 
+            this.name.HeaderText = "Assignment Name";
+            this.name.Name = "name";
+            // 
+            // multiplier
+            // 
+            this.multiplier.HeaderText = "Multiplier";
+            this.multiplier.Name = "multiplier";
+            // 
+            // ptsPoss
+            // 
+            this.ptsPoss.HeaderText = "PtsPoss";
+            this.ptsPoss.Name = "ptsPoss";
+            // 
+            // score
+            // 
+            this.score.HeaderText = "Score";
+            this.score.Name = "score";
+            // 
+            // percent
+            // 
+            this.percent.HeaderText = "Percent";
+            this.percent.Name = "percent";
+            this.percent.ReadOnly = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 298);
+            this.ClientSize = new System.Drawing.Size(625, 298);
             this.Controls.Add(this.groupBoxGrade);
             this.Controls.Add(this.comboBoxClass);
             this.Controls.Add(this.labelClass);
@@ -340,11 +341,6 @@
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.Label labelPtsPoss;
         private System.Windows.Forms.ComboBox comboBoxCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn multiplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ptsPoss;
-        private System.Windows.Forms.DataGridViewTextBoxColumn score;
-        private System.Windows.Forms.DataGridViewTextBoxColumn percent;
         private System.Windows.Forms.Label labelCategory;
         private System.Windows.Forms.Label labelClass;
         private System.Windows.Forms.ComboBox comboBoxClass;
@@ -355,6 +351,11 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calculateToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn multiplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ptsPoss;
+        private System.Windows.Forms.DataGridViewTextBoxColumn score;
+        private System.Windows.Forms.DataGridViewTextBoxColumn percent;
     }
 }
 

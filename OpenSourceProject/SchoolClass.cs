@@ -90,8 +90,11 @@ namespace OpenSourceProject
             }
         }
 
+        public int remainingWeight { get; set; }
+
         public SchoolClass(string name)
         {
+            remainingWeight = 100;
             Name = name;
             CategoryList = new List<Category>();
         }
