@@ -18,24 +18,33 @@ namespace OpenSourceProject
         {
             get
             {
-                if (CategoryList.Count == 1)
-                {
-                    return CurrentCategory.Percent;
-                }
-                double percent = 0;
-                double remainingPercent = 100;
+                //If the total weight does not add up to 100, then find the multiplier than makes the weight sum = 100.
+                //Then multiply the weight of the category by the multiplier to get the new weight.
+                double weightSum = 0;
                 foreach (Category c in CategoryList)
                 {
-                    //Multiply the current category's percent  time its weigh divided by 100 and add it to the percent;
-                    percent += (c.Percent * (c.Weight / 100));
-
-                    remainingPercent -= c.Weight;
+                    weightSum += c.Weight;
                 }
-                if (remainingPercent != 0)
+                if (weightSum != 100)
                 {
-                    percent += remainingPercent;
+                    double multiplier = 100 / weightSum;
+                    double percent = 0;
+                    foreach (Category c in CategoryList)
+                    {
+                        percent += (c.Percent * (c.Weight / 100 * multiplier));
+                    }
+                    return percent;
                 }
-                return percent;
+                else
+                {
+                    double percent = 0;
+                    foreach (Category c in CategoryList)
+                    {
+                        //Multiply the current category's percent  time its weigh divided by 100 and add it to the percent;
+                        percent += (c.Percent * (c.Weight / 100));
+                    }
+                    return percent;
+                }
             }
         }
 

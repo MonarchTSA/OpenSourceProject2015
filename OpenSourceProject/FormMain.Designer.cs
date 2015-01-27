@@ -80,7 +80,7 @@
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.Size = new System.Drawing.Size(573, 150);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnEndCellEdit);
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEndEdit);
             this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnDeleteRow);
             // 
             // name

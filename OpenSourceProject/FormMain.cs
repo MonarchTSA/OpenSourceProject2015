@@ -41,7 +41,7 @@ namespace OpenSourceProject
         }
 
         //This method is fired once the user is done editing a cell
-        private void OnEndCellEdit(object sender, DataGridViewCellEventArgs e)
+        private void OnCellEndEdit(object sender, DataGridViewCellEventArgs e)
        { 
             //Validate entry
             if (ValidateEntry(e))
