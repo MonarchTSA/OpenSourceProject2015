@@ -340,7 +340,7 @@ namespace OpenSourceProject
             if (!double.IsNaN(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent) &&
                 CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Score != -1)
             {
-                dataGridView.Rows[e.RowIndex].Cells[4].Value = CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent;
+                dataGridView.Rows[e.RowIndex].Cells[4].Value = Math.Round(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent, 2);
             }
         }
 
@@ -360,7 +360,7 @@ namespace OpenSourceProject
             {
                 labelPtsPoss.Text = CurrentClass.CurrentCategory.PtsPoss.ToString();
                 labelScore.Text = CurrentClass.CurrentCategory.Score.ToString();
-                labelPercent.Text = CurrentClass.CurrentCategory.Percent.ToString();
+                labelPercent.Text = Math.Round(CurrentClass.CurrentCategory.Percent, 2).ToString();
             }
             else
             {
@@ -405,7 +405,7 @@ namespace OpenSourceProject
             if (!double.IsNaN(CurrentClass.Percent))
             {
                 labelLetterGrade.Text = "" + CurrentClass.LetterGrade;
-                labelGrade.Text = CurrentClass.Percent + "%";
+                labelGrade.Text = Math.Round(CurrentClass.Percent, 2) + "%";
             }
             else
             {

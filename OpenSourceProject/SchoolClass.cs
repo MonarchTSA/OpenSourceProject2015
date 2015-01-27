@@ -28,12 +28,12 @@ namespace OpenSourceProject
                 if (weightSum != 100)
                 {
                     double multiplier = 100 / weightSum;
-                    double percent = 0;
+                    double finalPercent = 0;
                     foreach (Category c in CategoryList)
                     {
-                        percent += (c.Percent * (c.Weight / 100 * multiplier));
+                        finalPercent = finalPercent + (c.Percent * (c.Weight / 100d * multiplier));
                     }
-                    return percent;
+                    return finalPercent;
                 }
                 else
                 {
