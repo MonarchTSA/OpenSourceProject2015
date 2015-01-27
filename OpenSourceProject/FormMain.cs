@@ -161,6 +161,9 @@ namespace OpenSourceProject
                     //Set the combobox text to the newly created class
                     comboBoxClass.Text = CurrentClass.Name;
 
+                    //Update the groupboxgrade's text to the current class's name
+                    groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
+
                     if (ClassList.Count != 1)
                     {
                         //Clear the rows
@@ -189,23 +192,29 @@ namespace OpenSourceProject
                 //Update the currentclassindex to the last index
                 CurrentClassIndex = comboBoxClass.SelectedIndex - 1;
 
-                //Update the combobox text to the current category's text
-                comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
+                //Update the groupboxgrade's text to the current class's name
+                groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
 
-                //Load the data
-                LoadData();
+                if (CurrentClass.CategoryList.Count != 0)
+                {
+                    //Update the combobox text to the current category's text
+                    comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
 
-                //Store the data
-                StoreData();
+                    //Load the data
+                    LoadData();
 
-                //Update the totals
-                UpdateTotals();
+                    //Store the data
+                    StoreData();
 
-                //Update the grade
-                UpdateGrade();
+                    //Update the totals
+                    UpdateTotals();
 
-                //Update the category list
-                UpdateCategoryList();
+                    //Update the grade
+                    UpdateGrade();
+
+                    //Update the category list
+                    UpdateCategoryList();
+                }
              }
         }   
 
