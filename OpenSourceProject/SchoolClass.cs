@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace OpenSourceProject
 {
-    class SchoolClass
+    public class SchoolClass
     {
         //The name of the class
         public string Name { get; set; }

@@ -28,21 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ptsPoss = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editCategory = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxTotals = new System.Windows.Forms.GroupBox();
             this.divider2 = new System.Windows.Forms.Label();
             this.divider1 = new System.Windows.Forms.Label();
@@ -52,14 +49,13 @@
             this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.labelCategory = new System.Windows.Forms.Label();
             this.labelClass = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxClass = new System.Windows.Forms.ComboBox();
             this.groupBoxGrade = new System.Windows.Forms.GroupBox();
             this.labelGrade = new System.Windows.Forms.Label();
             this.labelLetterGrade = new System.Windows.Forms.Label();
             this.divider3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
-            this.editCategory.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.groupBoxTotals.SuspendLayout();
             this.groupBoxGrade.SuspendLayout();
             this.SuspendLayout();
@@ -113,16 +109,16 @@
             this.percent.Name = "percent";
             this.percent.ReadOnly = true;
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.calculateToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(620, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(620, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip";
             // 
             // fileToolStripMenuItem
             // 
@@ -157,19 +153,6 @@
             this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
             this.calculateToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.calculateToolStripMenuItem.Text = "Calculate";
-            // 
-            // editCategory
-            // 
-            this.editCategory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
-            this.editCategory.Name = "editCategory";
-            this.editCategory.Size = new System.Drawing.Size(95, 26);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
-            this.editToolStripMenuItem.Text = "Edit";
             // 
             // groupBoxTotals
             // 
@@ -232,6 +215,7 @@
             // 
             this.comboBoxCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCategory.Enabled = false;
             this.comboBoxCategory.FormattingEnabled = true;
             this.comboBoxCategory.Items.AddRange(new object[] {
             "Create new category"});
@@ -260,14 +244,17 @@
             this.labelClass.TabIndex = 6;
             this.labelClass.Text = "Class";
             // 
-            // comboBox1
+            // comboBoxClass
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(75, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            this.comboBoxClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxClass.FormattingEnabled = true;
+            this.comboBoxClass.Items.AddRange(new object[] {
+            "Create new class"});
+            this.comboBoxClass.Location = new System.Drawing.Point(75, 43);
+            this.comboBoxClass.Name = "comboBoxClass";
+            this.comboBoxClass.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxClass.TabIndex = 7;
+            this.comboBoxClass.SelectionChangeCommitted += new System.EventHandler(this.OnClassChange);
             // 
             // groupBoxGrade
             // 
@@ -313,22 +300,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 298);
             this.Controls.Add(this.groupBoxGrade);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxClass);
             this.Controls.Add(this.labelClass);
             this.Controls.Add(this.labelCategory);
             this.Controls.Add(this.comboBoxCategory);
             this.Controls.Add(this.groupBoxTotals);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(636, 337);
             this.Name = "FormMain";
             this.Text = "Grade Calculator";
             this.Click += new System.EventHandler(this.OnClick);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.editCategory.ResumeLayout(false);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.groupBoxTotals.ResumeLayout(false);
             this.groupBoxTotals.PerformLayout();
             this.groupBoxGrade.ResumeLayout(false);
@@ -341,11 +327,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip editCategory;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxTotals;
         private System.Windows.Forms.Label divider2;
         private System.Windows.Forms.Label divider1;
@@ -360,7 +344,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn percent;
         private System.Windows.Forms.Label labelCategory;
         private System.Windows.Forms.Label labelClass;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxClass;
         private System.Windows.Forms.GroupBox groupBoxGrade;
         private System.Windows.Forms.Label divider3;
         private System.Windows.Forms.Label labelLetterGrade;

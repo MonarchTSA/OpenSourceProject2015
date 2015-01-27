@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace OpenSourceProject
 {
-    public partial class FormEnterCategory : Form
+    public partial class FormEnterClass : Form
     {
 
-        public object[] data { get; set; }
+        public string name { get; set; }
 
-        public FormEnterCategory(int remainingPercent)
+        public FormEnterClass()
         {
             InitializeComponent();
-            data = new object[2];
-            numericUpDownPercent.Maximum = remainingPercent;
         }
 
         private void buttonResult(object sender, EventArgs e)
@@ -28,8 +26,7 @@ namespace OpenSourceProject
             if (button.Text == "Ok")
             {
                 this.DialogResult = DialogResult.OK;
-                data[0] = textBoxCategoryName.Text;
-                data[1] = numericUpDownPercent.Value;
+                name = textBoxClassName.Text;
                 this.Close();
             }
             else
@@ -37,11 +34,6 @@ namespace OpenSourceProject
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
-        }
-
-        private void numericUpDownPercent_Enter(object sender, EventArgs e)
-        {
-            numericUpDownPercent.Select(0, numericUpDownPercent.Text.Length);
         }
     }
 }

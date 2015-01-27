@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenSourceProject
 {
-    class Assignment
+    public class Assignment
     {
         //The name of the the assignment
         public string Name { get; set; }

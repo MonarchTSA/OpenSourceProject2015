@@ -8,16 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OpenSourceProject {
+namespace OpenSourceProject 
+{
     //TODO: Prevent user from entering a negative value in the datagridview
-    public partial class FormMain : Form {
+    public partial class FormMain : Form 
+    {
 
-        SchoolClass SchoolClass = new SchoolClass("everything");
-        List<SchoolClass> Classes = new List<SchoolClass>();
+        public List<SchoolClass> ClassList { get; set; }
+        public int CurrentClassIndex { get; set; }
+        public SchoolClass CurrentClass
+        {
+            get
+            {
+                return ClassList[CurrentClassIndex];
+            }
+        }
 
         public FormMain()
         {
             InitializeComponent();
+            ClassList = new List<SchoolClass>();
         }
 
         //This method is fired once the user is done editing a cell
@@ -56,20 +66,20 @@ namespace OpenSourceProject {
                     Category category = new Category(formEnterCatgory.data[0].ToString(), Convert.ToDouble(formEnterCatgory.data[1]));
 
                     //Add it to the categoryList
-                    SchoolClass.CategoryList.Add(category);
+                    CurrentClass.CategoryList.Add(category);
 
                     //Add it to the comboBoxCategory
                     comboBoxCategory.Items.Add(category.Name);
 
                     //Set the currentCategoryIndex to the last index
-                    SchoolClass.CurrentCategoryIndex = SchoolClass.CategoryList.Count - 1;
+                    CurrentClass.CurrentCategoryIndex = CurrentClass.CategoryList.Count - 1;
                     if (dataGridView.Enabled == false)
                     {
                         dataGridView.Enabled = true;
                     }
 
                     //Set the comboBox text to the new currentCategory's name
-                    comboBoxCategory.Text = SchoolClass.CurrentCategory.Name;
+                    comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
 
                     //Load the data
                     LoadData();
@@ -89,7 +99,7 @@ namespace OpenSourceProject {
             //Else, set the currentCategoryIndex to the index of the selected option minus one
             else
             {
-                SchoolClass.CurrentCategoryIndex = comboBoxCategory.SelectedIndex - 1;
+                CurrentClass.CurrentCategoryIndex = comboBoxCategory.SelectedIndex - 1;
                 
                 //Load the data
                 LoadData();
@@ -102,27 +112,103 @@ namespace OpenSourceProject {
 
                 //Update the grade
                 UpdateGrade();
+            }   
+        }
+        
+        private void OnClassChange(object sender, EventArgs e)
+        {
+            //If the option selected is the first index, a new category is created.
+            if (comboBoxClass.SelectedIndex == 0)
+            {
+                //Deselect text
+                comboBoxClass.SelectedIndex = -1;
+                //Open up category selection form
+                FormEnterClass formEnterClass = new FormEnterClass();
+                if (formEnterClass.ShowDialog() == DialogResult.OK)
+                {
+                    //Create the class
+                    SchoolClass schoolClass = new SchoolClass(formEnterClass.name);
+
+                    //Add it to the classList
+                    ClassList.Add(schoolClass);
+
+                    //Add it to the comboBoxClass
+                    comboBoxClass.Items.Add(schoolClass.Name);
+
+                    //Set the currentClassIndex to the last index
+                    CurrentClassIndex = ClassList.Count - 1;
+
+                    //Enable the comboBoxCategory if not enabled
+                    if (comboBoxCategory.Enabled == false)
+                    {
+                        comboBoxCategory.Enabled = true;
+                    }
+
+                    //Set the comboBox text to the new currentClass's name
+                    comboBoxClass.Text = CurrentClass.Name;
+
+                    if (ClassList.Count != 1)
+                    {
+                        //Clear the rows
+                        dataGridView.Rows.Clear();
+
+                        //Reset the text
+                        groupBoxTotals.Text = "Category Totals (%)";
+                        labelLetterGrade.Text = "";
+                        labelGrade.Text = "";
+                        labelPtsPoss.Text = "";
+                        labelScore.Text = "";
+                        labelPercent.Text = "";
+                        
+                        //Update the category list
+                        UpdateCategoryList();
+
+                        //Disable the datagriview
+                        dataGridView.Enabled = false;
+                    }
+                }
             }
 
+            //Else, set the currentClassIndex to the index of the selected option minus one
+            else
+            {
+                //Update the currentclassindex to the last index
+                CurrentClassIndex = comboBoxClass.SelectedIndex - 1;
 
+                //Update the combobox text to the current category's text
+                comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
 
+                //Load the data
+                LoadData();
 
-            
-        }
+                //Store the data
+                StoreData();
+
+                //Update the totals
+                UpdateTotals();
+
+                //Update the grade
+                UpdateGrade();
+
+                //Update the category list
+                UpdateCategoryList();
+             }
+        }   
+
 
         private void LoadData()
         {
             //Update the DataGridView
             dataGridView.Rows.Clear();
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
-            for (int i = 0; i < SchoolClass.CurrentCategory.AssignmentList.Count; i++)
+            for (int i = 0; i < CurrentClass.CurrentCategory.AssignmentList.Count; i++)
             {
                 //Create a DataGridView row
                 DataGridViewRow row = (DataGridViewRow)dataGridView.Rows[0].Clone();
                 for (int j = 0; j < 5; j++)
                 {
                     //Set the value of each cell equal to 
-                    row.Cells[j].Value = SchoolClass.CurrentCategory.AssignmentList[i].getFromIndex(j);
+                    row.Cells[j].Value = CurrentClass.CurrentCategory.AssignmentList[i].getFromIndex(j);
                 }
                 rows.Add(row);
             }
@@ -137,21 +223,21 @@ namespace OpenSourceProject {
         //This method take the data from the datagrid view and stores it in schoolclass.currentcategory.assignmentlist
         private void StoreData()
         {
-            SchoolClass.CurrentCategory.AssignmentList.Clear();
+            CurrentClass.CurrentCategory.AssignmentList.Clear();
             //For each row (assignment) in the category
             for (int i = 0; i < dataGridView.Rows.Count; i++)
             {
                 if (!dataGridView.Rows[i].IsNewRow)
                 {
                     //Add an assignment to to the current category's assignment list that has the value of the current row
-                    SchoolClass.CurrentCategory.AssignmentList.Add(new Assignment());
+                    CurrentClass.CurrentCategory.AssignmentList.Add(new Assignment());
                     for (int j = 0; j < 5; j++)
                     {
                         try
                         {
                             if (j == 0)
                             {
-                                SchoolClass.CurrentCategory.AssignmentList[i].setFromIndex((string)dataGridView.Rows[i].Cells[j].Value, j);
+                                CurrentClass.CurrentCategory.AssignmentList[i].setFromIndex((string)dataGridView.Rows[i].Cells[j].Value, j);
                             }
                             else if (j != 4)
                             {
@@ -159,16 +245,16 @@ namespace OpenSourceProject {
                                 {
                                     if (j == 1)
                                     {
-                                        SchoolClass.CurrentCategory.AssignmentList[i].setFromIndex(1, j);
+                                        CurrentClass.CurrentCategory.AssignmentList[i].setFromIndex(1, j);
                                     }
                                     else
                                     {
-                                        SchoolClass.CurrentCategory.AssignmentList[i].setFromIndex(-1, j);
+                                        CurrentClass.CurrentCategory.AssignmentList[i].setFromIndex(-1, j);
                                     }
                                 }
                                 else
                                 {
-                                    SchoolClass.CurrentCategory.AssignmentList[i].setFromIndex(Convert.ToDouble(dataGridView.Rows[i].Cells[j].Value), j);
+                                    CurrentClass.CurrentCategory.AssignmentList[i].setFromIndex(Convert.ToDouble(dataGridView.Rows[i].Cells[j].Value), j);
                                 }
                             }
                         }
@@ -201,7 +287,8 @@ namespace OpenSourceProject {
                         }
                         if (rowIsEmpty)
                         {
-                            dataGridView.Rows.RemoveAt(e.RowIndex);
+                            dataGridView.CancelEdit();
+                            dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
                         }
                         MessageBox.Show("Please enter only numbers.");
                         return false;
@@ -214,10 +301,10 @@ namespace OpenSourceProject {
         //Updates the percentage in the datagridview
         private void UpdateAssignmentPercentages(DataGridViewCellEventArgs e)
         {
-            if (!double.IsNaN(SchoolClass.CurrentCategory.AssignmentList[e.RowIndex].Percent) &&
-                SchoolClass.CurrentCategory.AssignmentList[e.RowIndex].Score != -1)
+            if (!double.IsNaN(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent) &&
+                CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Score != -1)
             {
-                dataGridView.Rows[e.RowIndex].Cells[4].Value = SchoolClass.CurrentCategory.AssignmentList[e.RowIndex].Percent;
+                dataGridView.Rows[e.RowIndex].Cells[4].Value = CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent;
             }
         }
 
@@ -236,9 +323,9 @@ namespace OpenSourceProject {
             }
             if (hasScores)
             {
-                labelPtsPoss.Text = SchoolClass.CurrentCategory.PtsPoss.ToString();
-                labelScore.Text = SchoolClass.CurrentCategory.Score.ToString();
-                labelPercent.Text = SchoolClass.CurrentCategory.Percent.ToString();
+                labelPtsPoss.Text = CurrentClass.CurrentCategory.PtsPoss.ToString();
+                labelScore.Text = CurrentClass.CurrentCategory.Score.ToString();
+                labelPercent.Text = CurrentClass.CurrentCategory.Percent.ToString();
             }
             else
             {
@@ -246,7 +333,7 @@ namespace OpenSourceProject {
                 labelScore.Text = "";
                 labelPercent.Text = "";
             }
-            groupBoxTotals.Text = SchoolClass.CurrentCategory.Name + " Totals (" + SchoolClass.CurrentCategory.Weight + "%)";
+            groupBoxTotals.Text = CurrentClass.CurrentCategory.Name + " Totals (" + CurrentClass.CurrentCategory.Weight + "%)";
         }
 
         //This method is fired when a user deletes a row
@@ -257,29 +344,59 @@ namespace OpenSourceProject {
             UpdateGrade();
         }
 
-        //This method is fired when the datagridview is clicked
-        private void OnClick(object sender, EventArgs e)
+        //This method is fired when a user clicks anywhere on the form (shows message box upon clicking disabled components)
+         void OnClick(object sender, EventArgs e)
         {
             var p = PointToClient(Cursor.Position);
             var c = GetChildAtPoint(p);
             if (c != null && c.Enabled == false)
             {
-                MessageBox.Show("No category is created. Please create one first");
+                if (ClassList.Count == 0)
+                {
+                    MessageBox.Show("No class is created. Please create one first");
+                }
+                else if (CurrentClass.CategoryList.Count == 0)
+                {
+                    MessageBox.Show("No category is created. Please create one first");
+                }
             }
         }
 
         //This method updates the grade groupbox text
         private void UpdateGrade()
         {
-            if (!double.IsNaN(SchoolClass.Percent))
+            if (!double.IsNaN(CurrentClass.Percent))
             {
-                labelLetterGrade.Text = "" + SchoolClass.LetterGrade;
-                labelGrade.Text = SchoolClass.Percent + "%";
+                labelLetterGrade.Text = "" + CurrentClass.LetterGrade;
+                labelGrade.Text = CurrentClass.Percent + "%";
             }
             else
             {
                 labelLetterGrade.Text = "";
                 labelGrade.Text = "";
+            }
+        }
+
+        //This method is used to update the category list when changing classes
+        private void UpdateCategoryList()
+        {
+            //Clear the combobox
+            comboBoxCategory.Items.Clear();
+            
+            //If there are no categories add the create new category option only
+            if (CurrentClass.CategoryList.Count == 0)
+            {
+                comboBoxCategory.Items.Add("Create new category");
+            }
+            //Else add add the create new category option and the categories
+            else
+            {
+                comboBoxCategory.Items.Add("Create new category");
+                for (int i = 0; i < CurrentClass.CategoryList.Count; i++)
+                {
+                    //add the name of the current index
+                    comboBoxCategory.Items.Add(CurrentClass.CategoryList[i ].Name);
+                }
             }
         }
     }
