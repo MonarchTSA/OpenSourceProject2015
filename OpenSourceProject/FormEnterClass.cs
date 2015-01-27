@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,9 +26,17 @@ namespace OpenSourceProject
             Button button = (Button)sender;
             if (button.Text == "Ok")
             {
-                this.DialogResult = DialogResult.OK;
-                name = textBoxClassName.Text;
-                this.Close();
+                if (textBoxClassName.Text == "")
+                {
+                    SystemSounds.Asterisk.Play();
+                    MessageBox.Show("You cannot enter an empty class name!");
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                    name = textBoxClassName.Text;
+                    this.Close();
+                }
             }
             else
             {
