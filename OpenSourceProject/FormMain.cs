@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -313,6 +314,7 @@ namespace OpenSourceProject
                             dataGridView.CancelEdit();
                             dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
                         }
+                        SystemSounds.Asterisk.Play();
                         MessageBox.Show("Please enter only numbers.");
                         return false;
                     }
@@ -375,10 +377,12 @@ namespace OpenSourceProject
             {
                 if (ClassList.Count == 0)
                 {
+                    SystemSounds.Asterisk.Play();
                     MessageBox.Show("No class is created. Please create one first");
                 }
                 else if (CurrentClass.CategoryList.Count == 0)
                 {
+                    SystemSounds.Asterisk.Play();
                     MessageBox.Show("No category is created. Please create one first");
                 }
             }
