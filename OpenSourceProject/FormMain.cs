@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OpenSourceProject 
 {
-    //TODO: Prevent user from entering a negative value in the datagridview
     public partial class FormMain : Form 
     {
-
+        //This list stores all the classes
         public List<SchoolClass> ClassList { get; set; }
+
+        //This is the current class index (used in currentClass)
         public int CurrentClassIndex { get; set; }
+
+        //Return ClassList[CurrentClassIndex]
         public SchoolClass CurrentClass
         {
             get
@@ -24,6 +30,10 @@ namespace OpenSourceProject
             }
         }
 
+        //This is the current file name.
+        public string CurrentFileName { get; set; }
+
+        //Constructor
         public FormMain()
         {
             InitializeComponent();
@@ -92,7 +102,10 @@ namespace OpenSourceProject
                     
                     //Update the grade
                     UpdateGrade();
-                
+                }
+                else if (CurrentClass.CategoryList.Count != 0)
+                {
+                    comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(CurrentClass.CurrentCategory.Name);
                 }
             }
 
@@ -115,6 +128,7 @@ namespace OpenSourceProject
             }   
         }
         
+        //This method is upon changing a class
         private void OnClassChange(object sender, EventArgs e)
         {
             //If the option selected is the first index, a new category is created.
@@ -144,7 +158,7 @@ namespace OpenSourceProject
                         comboBoxCategory.Enabled = true;
                     }
 
-                    //Set the comboBox text to the new currentClass's name
+                    //Set the combobox text to the newly created class
                     comboBoxClass.Text = CurrentClass.Name;
 
                     if (ClassList.Count != 1)
@@ -195,7 +209,7 @@ namespace OpenSourceProject
              }
         }   
 
-
+        //This method take the data from the list and puts it into the datagridview
         private void LoadData()
         {
             //Update the DataGridView
@@ -308,7 +322,6 @@ namespace OpenSourceProject
             }
         }
 
-        //TODO: seperate this into three methods one for ptsPoss, one for score, and one for percent
         //Updates the totals at the bottom
         private void UpdateTotals()
         {
@@ -345,7 +358,7 @@ namespace OpenSourceProject
         }
 
         //This method is fired when a user clicks anywhere on the form (shows message box upon clicking disabled components)
-         void OnClick(object sender, EventArgs e)
+        private void OnClick(object sender, EventArgs e)
         {
             var p = PointToClient(Cursor.Position);
             var c = GetChildAtPoint(p);
@@ -395,8 +408,82 @@ namespace OpenSourceProject
                 for (int i = 0; i < CurrentClass.CategoryList.Count; i++)
                 {
                     //add the name of the current index
-                    comboBoxCategory.Items.Add(CurrentClass.CategoryList[i ].Name);
+                    comboBoxCategory.Items.Add(CurrentClass.CategoryList[i].Name);
                 }
+            }
+            comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(CurrentClass.Name);
+        }
+
+        //This method is used to update the class list when loading classes
+        private void UpdateClassList()
+        {
+            //Clear the combobox
+            comboBoxClass.Items.Clear();
+
+            //If there are no classes add the create new class option only
+            if (ClassList.Count == 0)
+            {
+                comboBoxClass.Items.Add("Create new class");
+            }
+            //Else add add the create new class option and the classes
+            else
+            {
+                comboBoxClass.Items.Add("Create new class");
+                for (int i = 0; i < ClassList.Count; i++)
+                {
+                    //add the name of the current index
+                    comboBoxClass.Items.Add(ClassList[i].Name);
+                }
+            }
+            comboBoxClass.SelectedIndex = CurrentClassIndex + 1;
+        }
+
+        //This method is fired when the user clicks on the Save as dialog
+        private void OnSaveAs(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Classes file (*.classes)|*.classes";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                CurrentFileName = sfd.FileName;
+                WriteToBinary();
+            }
+        }
+        
+        //This writes the data to a binary files
+        private void WriteToBinary()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(CurrentFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, ClassList);
+            stream.Close();
+        }
+
+        //This file opens the data from a binary file and laods it
+        private void ReadFromBinary()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(CurrentFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            ClassList = (List<SchoolClass>)formatter.Deserialize(stream);
+            stream.Close();
+            LoadData();
+            StoreData();
+            UpdateTotals();
+            UpdateGrade();
+            UpdateCategoryList();
+            UpdateClassList();
+            comboBoxCategory.Enabled = true;
+        }
+
+        //This event is fired when the open dialog is selected
+        private void OnFileOpen(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Classes file (*.classes)|*.classes";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                CurrentFileName = ofd.FileName;
+                ReadFromBinary();
             }
         }
     }

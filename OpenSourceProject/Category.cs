@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace OpenSourceProject
 {
+    [Serializable()]
     public class Category
     {
         //The name of the category
@@ -69,6 +70,11 @@ namespace OpenSourceProject
         public Category(string name, double weight) {
             this.Name = name;
             this.Weight = weight;
+            AssignmentList = new List<Assignment>();
+        }
+
+        private Category()
+        {
             AssignmentList = new List<Assignment>();
         }
     }

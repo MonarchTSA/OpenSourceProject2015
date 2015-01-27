@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenSourceProject
 {
+    [Serializable()]
     public class Assignment
     {
         //The name of the the assignment

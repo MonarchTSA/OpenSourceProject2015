@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace OpenSourceProject
 {
+    [Serializable()]
     public class SchoolClass
     {
         //The name of the class
@@ -83,6 +84,11 @@ namespace OpenSourceProject
         public SchoolClass(string name)
         {
             Name = name;
+            CategoryList = new List<Category>();
+        }
+
+        private SchoolClass()
+        {
             CategoryList = new List<Category>();
         }
     }
