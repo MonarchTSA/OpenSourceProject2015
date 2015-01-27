@@ -481,6 +481,7 @@ namespace OpenSourceProject
             UpdateGrade();
             UpdateCategoryList();
             UpdateClassList();
+            dataGridView.Enabled = true;
             comboBoxCategory.Enabled = true;
         }
 
