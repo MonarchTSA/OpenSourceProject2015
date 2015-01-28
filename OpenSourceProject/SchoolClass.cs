@@ -13,7 +13,7 @@ namespace OpenSourceProject
         //The name of the class
         public string Name { get; set; }
 
-        //The grade/percent of the class
+        //The grade/percent of the class (read only)
         public double Percent 
         {
             get
@@ -102,6 +102,22 @@ namespace OpenSourceProject
         private SchoolClass()
         {
             CategoryList = new List<Category>();
+        }
+
+        public SchoolClass Clone()
+        {
+            SchoolClass sc = new SchoolClass(this.Name);
+            sc.CurrentCategoryIndex = this.CurrentCategoryIndex;
+            sc.remainingWeight = this.remainingWeight;
+            foreach (Category c in this.CategoryList)
+            {
+                sc.CategoryList.Add(new Category(c.Name, c.Weight));
+                foreach (Assignment a in c.AssignmentList)
+                {
+                    
+                }
+            }
+            return sc;
         }
     }
 }

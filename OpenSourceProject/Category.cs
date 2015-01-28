@@ -24,7 +24,7 @@ namespace OpenSourceProject
                     //If the assignment doesn't have the default value for ptsposs
                     if (!(a.PtsPoss < 0) && !(a.Score < 0))
                     {
-                        sum += a.PtsPoss;
+                        sum += a.PtsPoss * a.Multiplier;
                     }
                 }
                 return sum;
@@ -39,7 +39,7 @@ namespace OpenSourceProject
                 double sum = 0;
                 foreach (Assignment a in AssignmentList)
                 {
-                    sum += a.Score;
+                    sum += a.Score * a.Multiplier;
                 }
                 return sum;
             }

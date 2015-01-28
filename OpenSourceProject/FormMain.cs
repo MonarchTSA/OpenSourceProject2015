@@ -39,6 +39,7 @@ namespace OpenSourceProject
         {
             InitializeComponent();
             ClassList = new List<SchoolClass>();
+            CurrentFileName = "";
         }
 
         //This method is fired once the user is done editing a cell
@@ -47,6 +48,7 @@ namespace OpenSourceProject
             //Validate entry
             if (ValidateEntry(e))
             {
+
                 //Add the data on the datagridview to to the current category
                 StoreData();
 
@@ -242,6 +244,10 @@ namespace OpenSourceProject
                 DataGridViewRow row = (DataGridViewRow)dataGridView.Rows[0].Clone();
                 for (int j = 0; j < 5; j++)
                 {
+                    if (j == 1)
+                    {
+                        row.Cells[j].Value = CurrentClass.CurrentCategory.AssignmentList[i].getFromIndex(j);
+                    }
                     //Set the value of each cell equal to 
                     row.Cells[j].Value = CurrentClass.CurrentCategory.AssignmentList[i].getFromIndex(j);
                 }
@@ -270,12 +276,14 @@ namespace OpenSourceProject
                     {
                         try
                         {
+                            //If the current cell is not in the first column
                             if (j == 0)
                             {
                                 CurrentClass.CurrentCategory.AssignmentList[i].setFromIndex((string)dataGridView.Rows[i].Cells[j].Value, j);
                             }
-                            else if (j != 4)
+                            else
                             {
+                                //If the cell is null
                                 if (dataGridView.Rows[i].Cells[j].Value == null)
                                 {
                                     if (j == 1)
@@ -474,6 +482,17 @@ namespace OpenSourceProject
             }
         }
         
+        private void OnSave(object sender, EventArgs e)
+        {
+            if (CurrentFileName == "")
+            {
+                OnSaveAs(sender, e);
+            }
+            else
+            {
+                WriteToBinary();
+            }
+        }
         //This writes the data to a binary files
         private void WriteToBinary()
         {
@@ -511,5 +530,11 @@ namespace OpenSourceProject
                 ReadFromBinary();
             }
         }
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
     }
 }

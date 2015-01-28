@@ -24,7 +24,7 @@ namespace OpenSourceProject
             }
             set
             {
-                ptsPoss = value * Multiplier;
+                ptsPoss = value;
             }
         }
         private double ptsPoss;
@@ -38,7 +38,7 @@ namespace OpenSourceProject
             }
             set
             {
-                score = value * Multiplier;
+                score = value;
             }
         }
         private double score;
