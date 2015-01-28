@@ -421,12 +421,21 @@ namespace OpenSourceProject
         //This method updates the grade groupbox text
         private void UpdateGrade()
         {
+            bool hasBlankCategory = false;
+            foreach (Category c in CurrentClass.CategoryList)
+            {
+                if (double.IsNaN(c.Percent))
+                {
+                    hasBlankCategory = true;
+                    break;
+                } 
+            }
             if (!double.IsNaN(CurrentClass.Percent) && !double.IsInfinity(CurrentClass.Percent))
             {
                 labelLetterGrade.Text = "" + CurrentClass.LetterGrade;
                 labelGrade.Text = Math.Round(CurrentClass.Percent, 2) + "%";
             }
-            else
+            else if (!hasBlankCategory)
             {
                 labelLetterGrade.Text = "";
                 labelGrade.Text = "";
