@@ -318,7 +318,7 @@
             this.Name = "FormMain";
             this.Text = "Grade Calculator";
             this.Click += new System.EventHandler(this.OnClick);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnHotkey);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

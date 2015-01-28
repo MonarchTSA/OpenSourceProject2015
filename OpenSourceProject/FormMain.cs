@@ -551,9 +551,20 @@ namespace OpenSourceProject
             }
         }
 
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        private void OnHotkey(object sender, KeyEventArgs e)
         {
-
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.S:
+                        OnSave(new object(), new EventArgs());
+                        break;
+                    case Keys.O:
+                        OnFileOpen(new object(), new EventArgs());
+                        break;
+                }
+            }
         }
 
     }
