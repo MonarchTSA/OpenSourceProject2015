@@ -39,7 +39,10 @@ namespace OpenSourceProject
                 double sum = 0;
                 foreach (Assignment a in AssignmentList)
                 {
-                    sum += a.Score * a.Multiplier;
+                    if (a.Score != -1)
+                    {
+                        sum += a.Score * a.Multiplier;
+                    }
                 }
                 return sum;
             }
@@ -50,7 +53,7 @@ namespace OpenSourceProject
         {
             get
             {
-                if (Score != -1 && PtsPoss != -1)
+                if ((Score != -1 && PtsPoss != -1))
                 {
                     return Score / PtsPoss * 100;
                 }

@@ -319,6 +319,12 @@ namespace OpenSourceProject
                         //Delete the cell
                         dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = null;
                         bool rowIsEmpty = true;
+                        //Store the data
+                        StoreData();
+                        //Update the assignment pecent
+                        UpdateAssignmentPercentages(e);
+                        UpdateTotals();
+                        UpdateGrade();
                         //Check to see if the row is empty, if it is delete the row, otherwise don't
                         foreach (DataGridViewCell cell in dataGridView.Rows[e.RowIndex].Cells)
                         {
@@ -346,9 +352,14 @@ namespace OpenSourceProject
         private void UpdateAssignmentPercentages(DataGridViewCellEventArgs e)
         {
             if (!double.IsNaN(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent) &&
-                CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Score != -1)
+                CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Score != -1 &&
+                !double.IsInfinity(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent))
             {
                 dataGridView.Rows[e.RowIndex].Cells[4].Value = Math.Round(CurrentClass.CurrentCategory.AssignmentList[e.RowIndex].Percent, 2);
+            }
+            else
+            {
+                dataGridView.Rows[e.RowIndex].Cells[4].Value = null;
             }
         }
 
@@ -410,7 +421,7 @@ namespace OpenSourceProject
         //This method updates the grade groupbox text
         private void UpdateGrade()
         {
-            if (!double.IsNaN(CurrentClass.Percent))
+            if (!double.IsNaN(CurrentClass.Percent) && !double.IsInfinity(CurrentClass.Percent))
             {
                 labelLetterGrade.Text = "" + CurrentClass.LetterGrade;
                 labelGrade.Text = Math.Round(CurrentClass.Percent, 2) + "%";
