@@ -44,5 +44,23 @@ namespace OpenSourceProject
                 this.Close();
             }
         }
+
+        private void OnEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBoxClassName.Text == "")
+                {
+                    SystemSounds.Asterisk.Play();
+                    MessageBox.Show("You cannot enter an empty class name!");
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                    name = textBoxClassName.Text;
+                    this.Close();
+                }
+            }
+        }
     }
 }

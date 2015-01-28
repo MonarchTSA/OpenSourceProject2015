@@ -73,6 +73,7 @@
             this.numericUpDownPercent.Size = new System.Drawing.Size(100, 20);
             this.numericUpDownPercent.TabIndex = 8;
             this.numericUpDownPercent.Enter += new System.EventHandler(this.numericUpDownPercent_Enter);
+            this.numericUpDownPercent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnEnter);
             // 
             // labelCategoryName
             // 
@@ -89,6 +90,7 @@
             this.textBoxCategoryName.Name = "textBoxCategoryName";
             this.textBoxCategoryName.Size = new System.Drawing.Size(100, 20);
             this.textBoxCategoryName.TabIndex = 6;
+            this.textBoxCategoryName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnEnter);
             // 
             // FormEnterCategory
             // 

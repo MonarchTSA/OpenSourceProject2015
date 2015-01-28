@@ -69,6 +69,7 @@
             this.textBoxClassName.Name = "textBoxClassName";
             this.textBoxClassName.Size = new System.Drawing.Size(100, 20);
             this.textBoxClassName.TabIndex = 6;
+            this.textBoxClassName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnEnter);
             // 
             // FormEnterClass
             // 
@@ -80,6 +81,7 @@
             this.Controls.Add(this.labelClassName);
             this.Controls.Add(this.textBoxClassName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormEnterClass";

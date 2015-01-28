@@ -57,5 +57,29 @@ namespace OpenSourceProject
         {
             numericUpDownPercent.Select(0, numericUpDownPercent.Text.Length);
         }
+
+        private void OnEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBoxCategoryName.Text == "")
+                {
+                    SystemSounds.Asterisk.Play();
+                    MessageBox.Show("You cannot enter an empty category name!");
+                }
+                else if (numericUpDownPercent.Value == 0)
+                {
+                    SystemSounds.Asterisk.Play();
+                    MessageBox.Show("You cannot enter zero for the weight!");
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                    data[0] = textBoxCategoryName.Text;
+                    data[1] = numericUpDownPercent.Value;
+                    this.Close();
+                }
+            }
+        }
     }
 }

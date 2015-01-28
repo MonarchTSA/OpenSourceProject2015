@@ -24,10 +24,13 @@ namespace OpenSourceProject
             }
             set
             {
+                PreviousPtsPoss = PtsPoss;
                 ptsPoss = value;
             }
         }
         private double ptsPoss;
+
+        public double PreviousPtsPoss { get; set; }
         
         //The score of the assignment
         public double Score
@@ -38,10 +41,13 @@ namespace OpenSourceProject
             }
             set
             {
+                PreviousScore = Score;
                 score = value;
             }
         }
         private double score;
+
+        public double PreviousScore { get; set; }
 
         //The percent calculated of the assignment (read only)
         public double Percent
