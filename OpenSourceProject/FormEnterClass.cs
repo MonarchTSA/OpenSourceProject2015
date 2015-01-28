@@ -21,6 +21,12 @@ namespace OpenSourceProject
             InitializeComponent();
         }
 
+        public FormEnterClass(string name)
+        {
+            InitializeComponent();
+            textBoxClassName.Text = name;
+        }
+
         private void buttonResult(object sender, EventArgs e)
         {
             Button button = (Button)sender;

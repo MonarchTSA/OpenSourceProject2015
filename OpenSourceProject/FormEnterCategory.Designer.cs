@@ -31,10 +31,10 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.labelPickPercent = new System.Windows.Forms.Label();
-            this.numericUpDownPercent = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownWeight = new System.Windows.Forms.NumericUpDown();
             this.labelCategoryName = new System.Windows.Forms.Label();
             this.textBoxCategoryName = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -68,12 +68,12 @@
             // 
             // numericUpDownPercent
             // 
-            this.numericUpDownPercent.Location = new System.Drawing.Point(37, 87);
-            this.numericUpDownPercent.Name = "numericUpDownPercent";
-            this.numericUpDownPercent.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDownPercent.TabIndex = 8;
-            this.numericUpDownPercent.Enter += new System.EventHandler(this.numericUpDownPercent_Enter);
-            this.numericUpDownPercent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnEnter);
+            this.numericUpDownWeight.Location = new System.Drawing.Point(37, 87);
+            this.numericUpDownWeight.Name = "numericUpDownPercent";
+            this.numericUpDownWeight.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDownWeight.TabIndex = 8;
+            this.numericUpDownWeight.Enter += new System.EventHandler(this.numericUpDownPercent_Enter);
+            this.numericUpDownWeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnEnter);
             // 
             // labelCategoryName
             // 
@@ -100,7 +100,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.labelPickPercent);
-            this.Controls.Add(this.numericUpDownPercent);
+            this.Controls.Add(this.numericUpDownWeight);
             this.Controls.Add(this.labelCategoryName);
             this.Controls.Add(this.textBoxCategoryName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -108,7 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "FormEnterCategory";
             this.ShowIcon = false;
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +119,7 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Label labelPickPercent;
-        private System.Windows.Forms.NumericUpDown numericUpDownPercent;
+        private System.Windows.Forms.NumericUpDown numericUpDownWeight;
         private System.Windows.Forms.Label labelCategoryName;
         private System.Windows.Forms.TextBox textBoxCategoryName;
     }

@@ -69,7 +69,7 @@ namespace OpenSourceProject
             //If the option selected is the first index, a new category is created.
             if (comboBoxCategory.SelectedIndex == 0)
             {
-                if (CurrentClass.remainingWeight == 0)
+                if (CurrentClass.RemainingWeight == 0)
                 {
                     comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
                     SystemSounds.Asterisk.Play();
@@ -80,12 +80,12 @@ namespace OpenSourceProject
                     //Deselect text
                     comboBoxCategory.SelectedIndex = -1;
                     //Open up category selection form
-                    FormEnterCategory formEnterCatgory = new FormEnterCategory(CurrentClass.remainingWeight);
+                    FormEnterCategory formEnterCatgory = new FormEnterCategory(CurrentClass.RemainingWeight);
                     if (formEnterCatgory.ShowDialog() == DialogResult.OK)
                     {
                         //Create the category
                         Category category = new Category(formEnterCatgory.data[0].ToString(), Convert.ToInt32(formEnterCatgory.data[1]));
-                        CurrentClass.remainingWeight -= Convert.ToInt32(formEnterCatgory.data[1]);
+                        CurrentClass.RemainingWeight -= Convert.ToInt32(formEnterCatgory.data[1]);
 
                         //Add it to the categoryList
                         CurrentClass.CategoryList.Add(category);
@@ -549,6 +549,45 @@ namespace OpenSourceProject
                 CurrentFileName = ofd.FileName;
                 ReadFromBinary();
             }
+        }
+
+        private void OnEditClass(object sender, EventArgs e)
+        {
+            FormEnterClass form = new FormEnterClass(CurrentClass.Name);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                int index = comboBoxClass.Items.IndexOf(CurrentClass.Name);
+                comboBoxClass.Items.Remove(CurrentClass.Name);
+                CurrentClass.Name = form.name;
+                comboBoxClass.Items.Insert(index, CurrentClass.Name);
+                comboBoxClass.SelectedIndex = index;
+                groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
+            }
+        }
+
+        private void OnDeleteClass(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnEditCategory(object sender, EventArgs e)
+        {
+            FormEnterCategory form = new FormEnterCategory(CurrentClass.RemainingWeight + CurrentClass.CurrentCategory.Weight, CurrentClass.CurrentCategory.Weight, CurrentClass.CurrentCategory.Name);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                int index = comboBoxCategory.Items.IndexOf(CurrentClass.CurrentCategory.Name);
+                comboBoxCategory.Items.Remove(CurrentClass.CurrentCategory.Name);
+                CurrentClass.CurrentCategory.Name = (string)form.data[0];
+                CurrentClass.CurrentCategory.Weight = Convert.ToInt32(form.data[1]);
+                comboBoxCategory.Items.Insert(index, CurrentClass.CurrentCategory.Name);
+                comboBoxCategory.SelectedIndex = index;
+                groupBoxTotals.Text = CurrentClass.CurrentCategory.Name + " Totals (" + CurrentClass.CurrentCategory.Weight + "%)";
+            }
+        }
+
+        private void OnDeleteCategory(object sender, EventArgs e)
+        {
+
         }
     }
 }

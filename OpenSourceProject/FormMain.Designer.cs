@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +55,18 @@
             this.labelGrade = new System.Windows.Forms.Label();
             this.labelLetterGrade = new System.Windows.Forms.Label();
             this.divider3 = new System.Windows.Forms.Label();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.editCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.groupBoxTotals.SuspendLayout();
             this.groupBoxGrade.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -115,6 +124,7 @@
             this.menuStrip.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.calculateToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -303,6 +313,51 @@
             this.divider3.Size = new System.Drawing.Size(2, 15);
             this.divider3.TabIndex = 5;
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editClassToolStripMenuItem,
+            this.deleteClassToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.editCategoryToolStripMenuItem,
+            this.deleteCategoryToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "&Edit";
+            // 
+            // editClassToolStripMenuItem
+            // 
+            this.editClassToolStripMenuItem.Name = "editClassToolStripMenuItem";
+            this.editClassToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editClassToolStripMenuItem.Text = "&Edit class...";
+            this.editClassToolStripMenuItem.Click += new System.EventHandler(this.OnEditClass);
+            // 
+            // deleteClassToolStripMenuItem
+            // 
+            this.deleteClassToolStripMenuItem.Name = "deleteClassToolStripMenuItem";
+            this.deleteClassToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteClassToolStripMenuItem.Text = "&Delete class";
+            this.deleteClassToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteClass);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
+            // 
+            // editCategoryToolStripMenuItem
+            // 
+            this.editCategoryToolStripMenuItem.Name = "editCategoryToolStripMenuItem";
+            this.editCategoryToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editCategoryToolStripMenuItem.Text = "&Edit category...";
+            this.editCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnEditCategory);
+            // 
+            // deleteCategoryToolStripMenuItem
+            // 
+            this.deleteCategoryToolStripMenuItem.Name = "deleteCategoryToolStripMenuItem";
+            this.deleteCategoryToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteCategoryToolStripMenuItem.Text = "&Delete category";
+            this.deleteCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteCategory);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,6 +384,7 @@
             this.groupBoxTotals.PerformLayout();
             this.groupBoxGrade.ResumeLayout(false);
             this.groupBoxGrade.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,6 +418,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ptsPoss;
         private System.Windows.Forms.DataGridViewTextBoxColumn score;
         private System.Windows.Forms.DataGridViewTextBoxColumn percent;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editClassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteClassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem editCategoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteCategoryToolStripMenuItem;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

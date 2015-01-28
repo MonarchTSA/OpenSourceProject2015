@@ -90,11 +90,11 @@ namespace OpenSourceProject
             }
         }
 
-        public int remainingWeight { get; set; }
+        public int RemainingWeight { get; set; }
 
         public SchoolClass(string name)
         {
-            remainingWeight = 100;
+            RemainingWeight = 100;
             Name = name;
             CategoryList = new List<Category>();
         }
@@ -108,7 +108,7 @@ namespace OpenSourceProject
         {
             SchoolClass sc = new SchoolClass(this.Name);
             sc.CurrentCategoryIndex = this.CurrentCategoryIndex;
-            sc.remainingWeight = this.remainingWeight;
+            sc.RemainingWeight = this.RemainingWeight;
             foreach (Category c in this.CategoryList)
             {
                 sc.CategoryList.Add(new Category(c.Name, c.Weight));
