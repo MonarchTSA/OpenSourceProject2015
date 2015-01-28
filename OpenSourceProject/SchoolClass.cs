@@ -31,19 +31,19 @@ namespace OpenSourceProject
                     double finalPercent = 0;
                     foreach (Category c in CategoryList)
                     {
-                        finalPercent = finalPercent + (c.Percent * (c.Weight / 100d * multiplier));
+                        finalPercent += (c.Percent * (c.Weight / 100d * multiplier));
                     }
                     return finalPercent;
                 }
                 else
                 {
-                    double percent = 0;
+                    double finalPercent = 0;
                     foreach (Category c in CategoryList)
                     {
                         //Multiply the current category's percent  time its weigh divided by 100 and add it to the percent;
-                        percent += (c.Percent * (c.Weight / 100));
+                        finalPercent += (c.Percent * (c.Weight / 100d));
                     }
-                    return percent;
+                    return finalPercent;
                 }
             }
         }
