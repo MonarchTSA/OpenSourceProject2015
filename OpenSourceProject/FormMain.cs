@@ -217,7 +217,7 @@ namespace OpenSourceProject
             //Else, set the currentClassIndex to the index of the selected option minus one
             else
             {
-                //Update the currentclassindex to the last index
+                //Update the currentclassindex current index - 1
                 CurrentClassIndex = comboBoxClass.SelectedIndex - 1;
 
                 //Update the groupboxgrade's text to the current class's name
@@ -232,7 +232,7 @@ namespace OpenSourceProject
                         comboBoxCategory.Items.Add(c.Name);
                     }
                     //Update the combobox text to the current category's text
-                    comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
+                    comboBoxCategory.SelectedIndex = CurrentClass.CurrentCategoryIndex + 1;
 
                     //Load the data
                     LoadData();
@@ -620,8 +620,8 @@ namespace OpenSourceProject
                 else
                 {
                     comboBoxClass.Items.Remove(CurrentClass.Name);
-                    comboBoxClass.SelectedIndex = CurrentClassIndex;
                     --CurrentClassIndex;
+                    comboBoxClass.SelectedIndex = CurrentClassIndex + 1;
                     if (CurrentClass.CategoryList.Count != 0)
                     {
                         UpdateTotals();
@@ -635,15 +635,15 @@ namespace OpenSourceProject
                     }
                     groupBoxGrade.Text = CurrentClass.Name + " Grade";
                     groupBoxTotals.Text = "Category Totals (%)";
-                    ClassList.Remove(CurrentClass);
+                    ClassList.RemoveAt(CurrentClassIndex + 1);
                     dataGridView.Rows.Clear();
                     dataGridView.Enabled = false;
                     comboBoxCategory.Items.Clear();
                     comboBoxCategory.Items.Add("Create new category");
-                  
-                    editClassToolStripMenuItem.Enabled = false;
-                    deleteClassToolStripMenuItem.Enabled = false;
-                    addCategoryToolStripMenu.Enabled = false;
+                    foreach (Category c in CurrentClass.CategoryList)
+                    {
+                        comboBoxCategory.Items.Add(c.Name);
+                    }
                 }
             }
         }
@@ -667,11 +667,28 @@ namespace OpenSourceProject
         {
             if (MessageBox.Show("Are you sure?", "Delete category", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                //If user is deleting the last category in 
                 if (CurrentClass.CategoryList.Count == 1)
                 {
                     ClearTotals();
                     ClearGrade();
-                    groupBoxTotals.Text = "Class Grade";
+                    groupBoxTotals.Text = "Class Grade (%)";
+                    dataGridView.Enabled = false;
+                    dataGridView.Rows.Clear();
+                    comboBoxCategory.Items.Remove(CurrentClass.CurrentCategory.Name);
+                    CurrentClass.CategoryList.Remove(CurrentClass.CurrentCategory);
+                    editCategoryToolStripMenuItem.Enabled = false;
+                    deleteCategoryToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    comboBoxCategory.Items.Remove(CurrentClass.CurrentCategory.Name);
+                    CurrentClass.CategoryList.Remove(CurrentClass.CurrentCategory);
+                    --CurrentClass.CurrentCategoryIndex;
+                    LoadData();
+                    StoreData();
+                    UpdateTotals();
+                    UpdateGrade();
                 }
             }
         }
