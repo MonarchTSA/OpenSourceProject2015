@@ -114,6 +114,9 @@ namespace OpenSourceProject
 
                         //Update the grade
                         UpdateGrade();
+
+                        editCategoryToolStripMenuItem.Enabled = true;
+                        deleteCategoryToolStripMenuItem.Enabled = true;
                     }
                     else if (CurrentClass.CategoryList.Count != 0)
                     {
@@ -196,7 +199,18 @@ namespace OpenSourceProject
 
                         //Disable the datagriview
                         dataGridView.Enabled = false;
+
                     }
+                    else
+                    {
+                        editClassToolStripMenuItem.Enabled = true;
+                        deleteClassToolStripMenuItem.Enabled = true;
+                        addCategoryToolStripMenu.Enabled = true;
+                    }
+                }
+                else if (ClassList.Count != 0)
+                {
+                    comboBoxClass.Text = CurrentClass.Name;
                 }
             }
 
@@ -211,6 +225,12 @@ namespace OpenSourceProject
 
                 if (CurrentClass.CategoryList.Count != 0)
                 {
+                    comboBoxCategory.Items.Clear();
+                    comboBoxCategory.Items.Add("Create new category");
+                    foreach (Category c in CurrentClass.CategoryList)
+                    {
+                        comboBoxCategory.Items.Add(c.Name);
+                    }
                     //Update the combobox text to the current category's text
                     comboBoxCategory.Text = CurrentClass.CurrentCategory.Name;
 
@@ -228,6 +248,19 @@ namespace OpenSourceProject
 
                     //Update the category list
                     UpdateCategoryList();
+                }
+                else
+                {
+                    comboBoxCategory.SelectedIndex = -1;
+                    comboBoxCategory.Items.Clear();
+                    comboBoxCategory.Items.Add("Create new category");
+                    labelLetterGrade.Text = "";
+                    labelGrade.Text = "";
+                    labelPtsPoss.Text = "";
+                    labelScore.Text = "";
+                    labelPercent.Text = "";
+                    dataGridView.Rows.Clear();
+                    dataGridView.Enabled = false;
                 }
              }
         }   
@@ -383,9 +416,7 @@ namespace OpenSourceProject
             }
             else
             {
-                labelPtsPoss.Text = "";
-                labelScore.Text = "";
-                labelPercent.Text = "";
+                ClearTotals();
             }
             groupBoxTotals.Text = CurrentClass.CurrentCategory.Name + " Totals (" + CurrentClass.CurrentCategory.Weight + "%)";
         }
@@ -437,8 +468,7 @@ namespace OpenSourceProject
             }
             else if (!hasBlankCategory)
             {
-                labelLetterGrade.Text = "";
-                labelGrade.Text = "";
+                ClearGrade();
             }
         }
 
@@ -513,6 +543,7 @@ namespace OpenSourceProject
                 WriteToBinary();
             }
         }
+
         //This writes the data to a binary files
         private void WriteToBinary()
         {
@@ -567,7 +598,54 @@ namespace OpenSourceProject
 
         private void OnDeleteClass(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show("Are you sure? This will also delete the categories inside this class.", "Delete class", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (ClassList.Count == 1)
+                {
+                    ClearTotals();
+                    ClearGrade();
+                    groupBoxTotals.Text = "Class Grade";
+                    groupBoxGrade.Text = "Category Totals (%)";
+                    dataGridView.Enabled = false;
+                    dataGridView.Rows.Clear();
+                    comboBoxCategory.Enabled = false;
+                    comboBoxClass.Items.Remove(CurrentClass.Name);
+                    comboBoxCategory.Items.Clear();
+                    comboBoxCategory.Items.Add("Create new category");
+                    ClassList.Remove(CurrentClass);
+                    editClassToolStripMenuItem.Enabled = false;
+                    deleteClassToolStripMenuItem.Enabled = false;
+                    addCategoryToolStripMenu.Enabled = false;
+                }
+                else
+                {
+                    comboBoxClass.Items.Remove(CurrentClass.Name);
+                    comboBoxClass.SelectedIndex = CurrentClassIndex;
+                    --CurrentClassIndex;
+                    if (CurrentClass.CategoryList.Count != 0)
+                    {
+                        UpdateTotals();
+                        UpdateGrade();
+                        LoadData();
+                    }
+                    else
+                    {
+                        ClearTotals();
+                        ClearGrade();  
+                    }
+                    groupBoxGrade.Text = CurrentClass.Name + " Grade";
+                    groupBoxTotals.Text = "Category Totals (%)";
+                    ClassList.Remove(CurrentClass);
+                    dataGridView.Rows.Clear();
+                    dataGridView.Enabled = false;
+                    comboBoxCategory.Items.Clear();
+                    comboBoxCategory.Items.Add("Create new category");
+                  
+                    editClassToolStripMenuItem.Enabled = false;
+                    deleteClassToolStripMenuItem.Enabled = false;
+                    addCategoryToolStripMenu.Enabled = false;
+                }
+            }
         }
 
         private void OnEditCategory(object sender, EventArgs e)
@@ -587,7 +665,40 @@ namespace OpenSourceProject
 
         private void OnDeleteCategory(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure?", "Delete category", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (CurrentClass.CategoryList.Count == 1)
+                {
+                    ClearTotals();
+                    ClearGrade();
+                    groupBoxTotals.Text = "Class Grade";
+                }
+            }
+        }
 
+        private void OnAddCategory(object sender, EventArgs e)
+        {
+            comboBoxCategory.SelectedIndex = 0;
+            OnCategoryChange(new object(), new EventArgs());
+        }
+
+        private void OnAddClass(object sender, EventArgs e)
+        {
+            comboBoxClass.SelectedIndex = 0;
+            OnClassChange(new object(), new EventArgs());
+        }
+
+        private void ClearTotals()
+        {
+            labelPtsPoss.Text = "";
+            labelScore.Text = "";
+            labelPercent.Text = "";
+        }
+
+        private void ClearGrade()
+        {
+            labelLetterGrade.Text = "";
+            labelGrade.Text = "";
         }
     }
 }

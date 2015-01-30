@@ -40,6 +40,14 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addClassToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.addCategoryToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxTotals = new System.Windows.Forms.GroupBox();
             this.divider2 = new System.Windows.Forms.Label();
@@ -55,13 +63,7 @@
             this.labelGrade = new System.Windows.Forms.Label();
             this.labelLetterGrade = new System.Windows.Forms.Label();
             this.divider3 = new System.Windows.Forms.Label();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.editCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.groupBoxTotals.SuspendLayout();
@@ -166,6 +168,80 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OnFileOpen);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addClassToolStripMenu,
+            this.editClassToolStripMenuItem,
+            this.deleteClassToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.addCategoryToolStripMenu,
+            this.editCategoryToolStripMenuItem,
+            this.deleteCategoryToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "&Edit";
+            // 
+            // addClassToolStripMenu
+            // 
+            this.addClassToolStripMenu.Name = "addClassToolStripMenu";
+            this.addClassToolStripMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.addClassToolStripMenu.Size = new System.Drawing.Size(225, 22);
+            this.addClassToolStripMenu.Text = "&Add class...";
+            this.addClassToolStripMenu.Click += new System.EventHandler(this.OnAddClass);
+            // 
+            // editClassToolStripMenuItem
+            // 
+            this.editClassToolStripMenuItem.Enabled = false;
+            this.editClassToolStripMenuItem.Name = "editClassToolStripMenuItem";
+            this.editClassToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.editClassToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.editClassToolStripMenuItem.Text = "&Edit class...";
+            this.editClassToolStripMenuItem.Click += new System.EventHandler(this.OnEditClass);
+            // 
+            // deleteClassToolStripMenuItem
+            // 
+            this.deleteClassToolStripMenuItem.Enabled = false;
+            this.deleteClassToolStripMenuItem.Name = "deleteClassToolStripMenuItem";
+            this.deleteClassToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
+            this.deleteClassToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.deleteClassToolStripMenuItem.Text = "&Delete class";
+            this.deleteClassToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteClass);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
+            // 
+            // addCategoryToolStripMenu
+            // 
+            this.addCategoryToolStripMenu.Enabled = false;
+            this.addCategoryToolStripMenu.Name = "addCategoryToolStripMenu";
+            this.addCategoryToolStripMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.addCategoryToolStripMenu.Size = new System.Drawing.Size(225, 22);
+            this.addCategoryToolStripMenu.Text = "&Add category...";
+            this.addCategoryToolStripMenu.Click += new System.EventHandler(this.OnAddCategory);
+            // 
+            // editCategoryToolStripMenuItem
+            // 
+            this.editCategoryToolStripMenuItem.Enabled = false;
+            this.editCategoryToolStripMenuItem.Name = "editCategoryToolStripMenuItem";
+            this.editCategoryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Y)));
+            this.editCategoryToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.editCategoryToolStripMenuItem.Text = "&Edit category...";
+            this.editCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnEditCategory);
+            // 
+            // deleteCategoryToolStripMenuItem
+            // 
+            this.deleteCategoryToolStripMenuItem.Enabled = false;
+            this.deleteCategoryToolStripMenuItem.Name = "deleteCategoryToolStripMenuItem";
+            this.deleteCategoryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Y)));
+            this.deleteCategoryToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.deleteCategoryToolStripMenuItem.Text = "&Delete category";
+            this.deleteCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteCategory);
             // 
             // calculateToolStripMenuItem
             // 
@@ -313,51 +389,6 @@
             this.divider3.Size = new System.Drawing.Size(2, 15);
             this.divider3.TabIndex = 5;
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editClassToolStripMenuItem,
-            this.deleteClassToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.editCategoryToolStripMenuItem,
-            this.deleteCategoryToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "&Edit";
-            // 
-            // editClassToolStripMenuItem
-            // 
-            this.editClassToolStripMenuItem.Name = "editClassToolStripMenuItem";
-            this.editClassToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.editClassToolStripMenuItem.Text = "&Edit class...";
-            this.editClassToolStripMenuItem.Click += new System.EventHandler(this.OnEditClass);
-            // 
-            // deleteClassToolStripMenuItem
-            // 
-            this.deleteClassToolStripMenuItem.Name = "deleteClassToolStripMenuItem";
-            this.deleteClassToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.deleteClassToolStripMenuItem.Text = "&Delete class";
-            this.deleteClassToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteClass);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // editCategoryToolStripMenuItem
-            // 
-            this.editCategoryToolStripMenuItem.Name = "editCategoryToolStripMenuItem";
-            this.editCategoryToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.editCategoryToolStripMenuItem.Text = "&Edit category...";
-            this.editCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnEditCategory);
-            // 
-            // deleteCategoryToolStripMenuItem
-            // 
-            this.deleteCategoryToolStripMenuItem.Name = "deleteCategoryToolStripMenuItem";
-            this.deleteCategoryToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.deleteCategoryToolStripMenuItem.Text = "&Delete category";
-            this.deleteCategoryToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteCategory);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +456,8 @@
         private System.Windows.Forms.ToolStripMenuItem editCategoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteCategoryToolStripMenuItem;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ToolStripMenuItem addClassToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem addCategoryToolStripMenu;
     }
 }
 
