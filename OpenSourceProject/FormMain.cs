@@ -660,6 +660,7 @@ namespace OpenSourceProject
                 comboBoxCategory.Items.Insert(index, CurrentClass.CurrentCategory.Name);
                 comboBoxCategory.SelectedIndex = index;
                 groupBoxTotals.Text = CurrentClass.CurrentCategory.Name + " Totals (" + CurrentClass.CurrentCategory.Weight + "%)";
+                UpdateGrade();
             }
         }
 
@@ -672,7 +673,7 @@ namespace OpenSourceProject
                 {
                     ClearTotals();
                     ClearGrade();
-                    groupBoxTotals.Text = "Class Grade (%)";
+                    groupBoxTotals.Text = "Category Totals (%)";
                     dataGridView.Enabled = false;
                     dataGridView.Rows.Clear();
                     comboBoxCategory.Items.Remove(CurrentClass.CurrentCategory.Name);
