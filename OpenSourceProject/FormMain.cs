@@ -376,7 +376,14 @@ namespace OpenSourceProject
                         if (rowIsEmpty)
                         {
                             dataGridView.CancelEdit();
-                            dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
+                            try
+                            {
+                                dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Something went wrong. Try again.", "Error");
+                            }
                         }
                         SystemSounds.Asterisk.Play();
                         MessageBox.Show("Please enter only numbers.");

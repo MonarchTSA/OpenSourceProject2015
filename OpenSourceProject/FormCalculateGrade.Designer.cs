@@ -51,6 +51,7 @@
             // 
             // comboBoxCategories
             // 
+            this.comboBoxCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategories.FormattingEnabled = true;
             this.comboBoxCategories.Location = new System.Drawing.Point(73, 88);
             this.comboBoxCategories.Name = "comboBoxCategories";
@@ -77,6 +78,7 @@
             this.numericUpDownGrade.Name = "numericUpDownGrade";
             this.numericUpDownGrade.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownGrade.TabIndex = 0;
+            this.numericUpDownGrade.Enter += new System.EventHandler(this.OnEnter);
             // 
             // numericUpDownPoints
             // 
@@ -89,6 +91,7 @@
             this.numericUpDownPoints.Name = "numericUpDownPoints";
             this.numericUpDownPoints.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownPoints.TabIndex = 2;
+            this.numericUpDownPoints.Enter += new System.EventHandler(this.OnEnter);
             // 
             // label3
             // 

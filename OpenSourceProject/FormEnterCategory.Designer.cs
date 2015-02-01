@@ -68,7 +68,7 @@
             // 
             // numericUpDownWeight
             // 
-            this.numericUpDownWeight.Location = new System.Drawing.Point(37, 87);
+            this.numericUpDownWeight.Location = new System.Drawing.Point(39, 87);
             this.numericUpDownWeight.Name = "numericUpDownWeight";
             this.numericUpDownWeight.Size = new System.Drawing.Size(100, 20);
             this.numericUpDownWeight.TabIndex = 8;
@@ -78,7 +78,7 @@
             // labelCategoryName
             // 
             this.labelCategoryName.AutoSize = true;
-            this.labelCategoryName.Location = new System.Drawing.Point(29, 11);
+            this.labelCategoryName.Location = new System.Drawing.Point(31, 12);
             this.labelCategoryName.Name = "labelCategoryName";
             this.labelCategoryName.Size = new System.Drawing.Size(117, 13);
             this.labelCategoryName.TabIndex = 7;
@@ -86,7 +86,7 @@
             // 
             // textBoxCategoryName
             // 
-            this.textBoxCategoryName.Location = new System.Drawing.Point(37, 28);
+            this.textBoxCategoryName.Location = new System.Drawing.Point(39, 28);
             this.textBoxCategoryName.Name = "textBoxCategoryName";
             this.textBoxCategoryName.Size = new System.Drawing.Size(100, 20);
             this.textBoxCategoryName.TabIndex = 6;
