@@ -27,36 +27,43 @@ namespace OpenSourceProject
         {
             if (((Button)sender).Text == "Calculate")
             {
-                if (schoolClass.RemainingWeight == 0)
+                if (comboBoxCategories.SelectedIndex == -1)
                 {
-                    double wantedGrade = (double)numericUpDownGrade.Value;
-                    double assignmentPtsPoss = (double)numericUpDownPoints.Value;
-                    double currentGrade = schoolClass.Percent;
-                    double currentCategoryPercent = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Percent;
-                    double currentCategoryWeight = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Weight / 100d;
-                    double currentCategoryWeightedGrade = currentCategoryPercent * currentCategoryWeight;
-                    double wantedCategoryWeightedGrade = currentCategoryWeightedGrade + (wantedGrade - currentGrade);
-                    double wantedCategoryGrade = wantedCategoryWeightedGrade / currentCategoryWeight / 100d;
-                    double currentPtsPoss = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].PtsPoss;
-                    double currentScore = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Score;
-                    double wantedScore = wantedCategoryGrade * (currentPtsPoss + assignmentPtsPoss) - currentScore;
-                    MessageBox.Show("You have to get a " + wantedScore + "/" + assignmentPtsPoss + " or a " + Math.Round(wantedScore/assignmentPtsPoss*100,2) + "% to get a " + wantedGrade + "% in this class.", "Results");
+                    MessageBox.Show("Please select the class it is going to be in.", "Error");
                 }
                 else
                 {
-                    double wantedGrade = (double)numericUpDownGrade.Value;
-                    double assignmentPtsPoss = (double)numericUpDownPoints.Value;
-                    double currentGrade = schoolClass.Percent;
-                    double currentCategoryPercent = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Percent;
-                    double multiplier = 100 / (100 - schoolClass.RemainingWeight);
-                    double currentCategoryWeight = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Weight / 100d * multiplier;
-                    double currentCategoryWeightedGrade = currentCategoryPercent * currentCategoryWeight;
-                    double wantedCategoryWeightedGrade = currentCategoryWeightedGrade + (wantedGrade - currentGrade);
-                    double wantedCategoryGrade = wantedCategoryWeightedGrade / currentCategoryWeight / 100d;
-                    double currentPtsPoss = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].PtsPoss;
-                    double currentScore = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Score;
-                    double wantedScore = wantedCategoryGrade * (currentPtsPoss + assignmentPtsPoss) - currentScore;
-                    MessageBox.Show("You have to get a " + wantedScore + "/" + assignmentPtsPoss + " or a " + Math.Round(wantedScore / assignmentPtsPoss * 100, 2) + "% to get a " + wantedGrade + "% in this class.", "Results");
+                    if (schoolClass.RemainingWeight == 0)
+                    {
+                        double wantedGrade = (double)numericUpDownGrade.Value;
+                        double assignmentPtsPoss = (double)numericUpDownPoints.Value;
+                        double currentGrade = schoolClass.Percent;
+                        double currentCategoryPercent = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Percent;
+                        double currentCategoryWeight = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Weight / 100d;
+                        double currentCategoryWeightedGrade = currentCategoryPercent * currentCategoryWeight;
+                        double wantedCategoryWeightedGrade = currentCategoryWeightedGrade + (wantedGrade - currentGrade);
+                        double wantedCategoryGrade = wantedCategoryWeightedGrade / currentCategoryWeight / 100d;
+                        double currentPtsPoss = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].PtsPoss;
+                        double currentScore = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Score;
+                        double wantedScore = wantedCategoryGrade * (currentPtsPoss + assignmentPtsPoss) - currentScore;
+                        MessageBox.Show("You have to get a " + wantedScore + "/" + assignmentPtsPoss + " or a " + Math.Round(wantedScore/assignmentPtsPoss*100,2) + "% to get a " + wantedGrade + "% in this class.", "Results");
+                    }
+                    else
+                    {
+                        double wantedGrade = (double)numericUpDownGrade.Value;
+                        double assignmentPtsPoss = (double)numericUpDownPoints.Value;
+                        double currentGrade = schoolClass.Percent;
+                        double currentCategoryPercent = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Percent;
+                        double multiplier = 100 / (100 - schoolClass.RemainingWeight);
+                        double currentCategoryWeight = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Weight / 100d * multiplier;
+                        double currentCategoryWeightedGrade = currentCategoryPercent * currentCategoryWeight;
+                        double wantedCategoryWeightedGrade = currentCategoryWeightedGrade + (wantedGrade - currentGrade);
+                        double wantedCategoryGrade = wantedCategoryWeightedGrade / currentCategoryWeight / 100d;
+                        double currentPtsPoss = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].PtsPoss;
+                        double currentScore = schoolClass.CategoryList[comboBoxCategories.SelectedIndex].Score;
+                        double wantedScore = wantedCategoryGrade * (currentPtsPoss + assignmentPtsPoss) - currentScore;
+                        MessageBox.Show("You have to get a " + wantedScore + "/" + assignmentPtsPoss + " or a " + Math.Round(wantedScore / assignmentPtsPoss * 100, 2) + "% to get a " + wantedGrade + "% in this class.", "Results");
+                    }
                 }
             }
             else

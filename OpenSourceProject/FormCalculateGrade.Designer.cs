@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalculateGrade));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCategories = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,11 +71,6 @@
             // numericUpDownGrade
             // 
             this.numericUpDownGrade.Location = new System.Drawing.Point(74, 30);
-            this.numericUpDownGrade.Maximum = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
             this.numericUpDownGrade.Name = "numericUpDownGrade";
             this.numericUpDownGrade.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownGrade.TabIndex = 0;
@@ -136,6 +132,7 @@
             this.Controls.Add(this.comboBoxCategories);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormCalculateGrade";

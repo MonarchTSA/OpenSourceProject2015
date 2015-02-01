@@ -60,6 +60,8 @@ namespace OpenSourceProject
 
                 //Update grade
                 UpdateGrade();
+
+                calculateToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -621,9 +623,13 @@ namespace OpenSourceProject
                         addClassToolStripMenu.Enabled = true;
                         editClassToolStripMenuItem.Enabled = true;
                         deleteClassToolStripMenuItem.Enabled = true;
-                        calculateToolStripMenuItem.Enabled = true;
                         saveAsToolStripMenuItem.Enabled = true;
                         saveToolStripMenuItem.Enabled = true;
+                        if (!double.IsNaN(CurrentClass.Percent))
+                        {
+                            calculateToolStripMenuItem.Enabled = true;
+                        }
+                        dataGridView.Enabled = false;
                     }
                     else
                     {
