@@ -66,10 +66,10 @@
             this.labelPickPercent.TabIndex = 9;
             this.labelPickPercent.Text = "Enter a weight for the category:";
             // 
-            // numericUpDownPercent
+            // numericUpDownWeight
             // 
             this.numericUpDownWeight.Location = new System.Drawing.Point(37, 87);
-            this.numericUpDownWeight.Name = "numericUpDownPercent";
+            this.numericUpDownWeight.Name = "numericUpDownWeight";
             this.numericUpDownWeight.Size = new System.Drawing.Size(100, 20);
             this.numericUpDownWeight.TabIndex = 8;
             this.numericUpDownWeight.Enter += new System.EventHandler(this.numericUpDownPercent_Enter);
@@ -108,6 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "FormEnterCategory";
             this.ShowIcon = false;
+            this.Text = "Enter a category";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

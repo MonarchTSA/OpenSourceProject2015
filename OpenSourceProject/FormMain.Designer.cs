@@ -245,9 +245,11 @@
             // 
             // calculateToolStripMenuItem
             // 
+            this.calculateToolStripMenuItem.Enabled = false;
             this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
             this.calculateToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.calculateToolStripMenuItem.Text = "&Calculate";
+            this.calculateToolStripMenuItem.Click += new System.EventHandler(this.calculateToolStripMenuItem_Click);
             // 
             // groupBoxTotals
             // 

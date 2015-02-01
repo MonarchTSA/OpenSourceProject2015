@@ -36,7 +36,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(94, 125);
+            this.buttonCancel.Location = new System.Drawing.Point(77, 74);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(52, 23);
             this.buttonCancel.TabIndex = 11;
@@ -46,7 +46,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(32, 125);
+            this.buttonOk.Location = new System.Drawing.Point(19, 74);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(52, 23);
             this.buttonOk.TabIndex = 10;
@@ -57,7 +57,7 @@
             // labelClassName
             // 
             this.labelClassName.AutoSize = true;
-            this.labelClassName.Location = new System.Drawing.Point(39, 43);
+            this.labelClassName.Location = new System.Drawing.Point(23, 32);
             this.labelClassName.Name = "labelClassName";
             this.labelClassName.Size = new System.Drawing.Size(100, 13);
             this.labelClassName.TabIndex = 7;
@@ -65,7 +65,7 @@
             // 
             // textBoxClassName
             // 
-            this.textBoxClassName.Location = new System.Drawing.Point(39, 64);
+            this.textBoxClassName.Location = new System.Drawing.Point(23, 48);
             this.textBoxClassName.Name = "textBoxClassName";
             this.textBoxClassName.Size = new System.Drawing.Size(100, 20);
             this.textBoxClassName.TabIndex = 6;
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(179, 165);
+            this.ClientSize = new System.Drawing.Size(146, 126);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.labelClassName);
@@ -86,6 +86,7 @@
             this.MinimizeBox = false;
             this.Name = "FormEnterClass";
             this.ShowIcon = false;
+            this.Text = "Enter a class";
             this.ResumeLayout(false);
             this.PerformLayout();
 

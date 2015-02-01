@@ -117,6 +117,7 @@ namespace OpenSourceProject
 
                         editCategoryToolStripMenuItem.Enabled = true;
                         deleteCategoryToolStripMenuItem.Enabled = true;
+                        calculateToolStripMenuItem.Enabled = true;
                     }
                     else if (CurrentClass.CategoryList.Count != 0)
                     {
@@ -680,6 +681,7 @@ namespace OpenSourceProject
                     CurrentClass.CategoryList.Remove(CurrentClass.CurrentCategory);
                     editCategoryToolStripMenuItem.Enabled = false;
                     deleteCategoryToolStripMenuItem.Enabled = false;
+                    calculateToolStripMenuItem.Enabled = false;
                 }
                 else
                 {
@@ -717,6 +719,12 @@ namespace OpenSourceProject
         {
             labelLetterGrade.Text = "";
             labelGrade.Text = "";
+        }
+
+        private void calculateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCalculateGrade form = new FormCalculateGrade(CurrentClass);
+            form.ShowDialog();
         }
     }
 }
