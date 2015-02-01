@@ -12,9 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OpenSourceProject 
+namespace OpenSourceProject
 {
-    public partial class FormMain : Form 
+    public partial class FormMain : Form
     {
         //This list stores all the classes
         public List<SchoolClass> ClassList { get; set; }
@@ -44,7 +44,7 @@ namespace OpenSourceProject
 
         //This method is fired once the user is done editing a cell
         private void OnCellEndEdit(object sender, DataGridViewCellEventArgs e)
-       { 
+        {
             //Validate entry
             if (ValidateEntry(e))
             {
@@ -124,14 +124,14 @@ namespace OpenSourceProject
                         comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(CurrentClass.CurrentCategory.Name);
                     }
                 }
-                
+
             }
 
             //Else, set the currentCategoryIndex to the index of the selected option minus one
             else
             {
                 CurrentClass.CurrentCategoryIndex = comboBoxCategory.SelectedIndex - 1;
-                
+
                 //Load the data
                 LoadData();
 
@@ -143,9 +143,9 @@ namespace OpenSourceProject
 
                 //Update the grade
                 UpdateGrade();
-            }   
+            }
         }
-        
+
         //This method is upon changing a class
         private void OnClassChange(object sender, EventArgs e)
         {
@@ -180,7 +180,7 @@ namespace OpenSourceProject
                     comboBoxClass.Text = CurrentClass.Name;
 
                     //Update the groupboxgrade's text to the current class's name
-                    groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
+                    groupBoxGrade.Text = CurrentClass.Name + " Grade";
 
                     if (ClassList.Count != 1)
                     {
@@ -194,12 +194,15 @@ namespace OpenSourceProject
                         labelPtsPoss.Text = "";
                         labelScore.Text = "";
                         labelPercent.Text = "";
-                        
+
                         //Update the category list
                         UpdateCategoryList();
 
                         //Disable the datagriview
                         dataGridView.Enabled = false;
+
+                        saveToolStripMenuItem.Enabled = true;
+                        saveAsToolStripMenuItem.Enabled = true;
 
                     }
                     else
@@ -222,7 +225,7 @@ namespace OpenSourceProject
                 CurrentClassIndex = comboBoxClass.SelectedIndex - 1;
 
                 //Update the groupboxgrade's text to the current class's name
-                groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
+                groupBoxGrade.Text = CurrentClass.Name + " Grade";
 
                 if (CurrentClass.CategoryList.Count != 0)
                 {
@@ -265,8 +268,8 @@ namespace OpenSourceProject
                     dataGridView.Rows.Clear();
                     dataGridView.Enabled = false;
                 }
-             }
-        }   
+            }
+        }
 
         //This method take the data from the list and puts it into the datagridview
         private void LoadData()
@@ -442,12 +445,12 @@ namespace OpenSourceProject
                 if (ClassList.Count == 0)
                 {
                     SystemSounds.Asterisk.Play();
-                    MessageBox.Show("No class is created. Please create one first");
+                    MessageBox.Show("No class is created. Please create one first.");
                 }
                 else if (CurrentClass.CategoryList.Count == 0)
                 {
                     SystemSounds.Asterisk.Play();
-                    MessageBox.Show("No category is created. Please create one first");
+                    MessageBox.Show("No category is created. Please create one first.");
                 }
             }
         }
@@ -462,7 +465,7 @@ namespace OpenSourceProject
                 {
                     hasBlankCategory = true;
                     break;
-                } 
+                }
             }
             if (!double.IsNaN(CurrentClass.Percent) && !double.IsInfinity(CurrentClass.Percent))
             {
@@ -480,7 +483,7 @@ namespace OpenSourceProject
         {
             //Clear the combobox
             comboBoxCategory.Items.Clear();
-            
+
             //If there are no categories add the create new category option only
             if (CurrentClass.CategoryList.Count == 0)
             {
@@ -534,7 +537,7 @@ namespace OpenSourceProject
                 WriteToBinary();
             }
         }
-        
+
         private void OnSave(object sender, EventArgs e)
         {
             if (CurrentFileName == "")
@@ -561,26 +564,34 @@ namespace OpenSourceProject
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(CurrentFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            ClassList = (List<SchoolClass>)formatter.Deserialize(stream);
-            stream.Close();
-            if (CurrentClass.CategoryList.Count != 0)
+            try
             {
-                LoadData();
-                StoreData();
-                UpdateTotals();
-                UpdateGrade();
-                UpdateCategoryList();
-                UpdateClassList();
-                dataGridView.Enabled = true;
-                comboBoxCategory.Enabled = true;
-                groupBoxGrade.Text = CurrentClass.Name + " Grade";
+                ClassList = (List<SchoolClass>)formatter.Deserialize(stream);
+                stream.Close();
+                if (CurrentClass.CategoryList.Count != 0)
+                {
+                    LoadData();
+                    StoreData();
+                    UpdateTotals();
+                    UpdateGrade();
+                    UpdateCategoryList();
+                    UpdateClassList();
+                    dataGridView.Enabled = true;
+                    comboBoxCategory.Enabled = true;
+                    groupBoxGrade.Text = CurrentClass.Name + " Grade";
+                }
+                else
+                {
+                    groupBoxGrade.Text = CurrentClass.Name + " Grade";
+                    UpdateCategoryList();
+                    UpdateClassList();
+                    comboBoxCategory.Enabled = true;
+                }
+
             }
-            else
+            catch
             {
-                groupBoxGrade.Text = CurrentClass.Name + " Grade";
-                UpdateCategoryList();
-                UpdateClassList();
-                comboBoxCategory.Enabled = true;
+                MessageBox.Show("There was an error loading your file. The file might be corrupted.", "Error");
             }
         }
 
@@ -593,6 +604,30 @@ namespace OpenSourceProject
             {
                 CurrentFileName = ofd.FileName;
                 ReadFromBinary();
+                foreach (SchoolClass sc in ClassList)
+                {
+                    if (sc.CategoryList.Count != 0)
+                    {
+                        addCategoryToolStripMenu.Enabled = true;
+                        editCategoryToolStripMenuItem.Enabled = true;
+                        deleteCategoryToolStripMenuItem.Enabled = true;
+                        addClassToolStripMenu.Enabled = true;
+                        editClassToolStripMenuItem.Enabled = true;
+                        deleteClassToolStripMenuItem.Enabled = true;
+                        calculateToolStripMenuItem.Enabled = true;
+                        saveAsToolStripMenuItem.Enabled = true;
+                        saveToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        addClassToolStripMenu.Enabled = true;
+                        editClassToolStripMenuItem.Enabled = true;
+                        deleteClassToolStripMenuItem.Enabled = true;
+                        saveAsToolStripMenuItem.Enabled = true;
+                        saveToolStripMenuItem.Enabled = true;
+                        addCategoryToolStripMenu.Enabled = true;
+                    }
+                }
             }
         }
 
@@ -606,7 +641,7 @@ namespace OpenSourceProject
                 CurrentClass.Name = form.name;
                 comboBoxClass.Items.Insert(index, CurrentClass.Name);
                 comboBoxClass.SelectedIndex = index;
-                groupBoxGrade.Text = CurrentClass.Name + " Grade"; 
+                groupBoxGrade.Text = CurrentClass.Name + " Grade";
             }
         }
 
@@ -630,11 +665,18 @@ namespace OpenSourceProject
                     editClassToolStripMenuItem.Enabled = false;
                     deleteClassToolStripMenuItem.Enabled = false;
                     addCategoryToolStripMenu.Enabled = false;
+                    editCategoryToolStripMenuItem.Enabled = false;
+                    deleteCategoryToolStripMenuItem.Enabled = false;
+                    saveAsToolStripMenuItem.Enabled = false;
+                    saveToolStripMenuItem.Enabled = false;
                 }
                 else
                 {
                     comboBoxClass.Items.Remove(CurrentClass.Name);
-                    --CurrentClassIndex;
+                    if (CurrentClassIndex != 0)
+                    {
+                        --CurrentClassIndex;
+                    }
                     comboBoxClass.SelectedIndex = CurrentClassIndex + 1;
                     if (CurrentClass.CategoryList.Count != 0)
                     {
@@ -645,7 +687,7 @@ namespace OpenSourceProject
                     else
                     {
                         ClearTotals();
-                        ClearGrade();  
+                        ClearGrade();
                     }
                     groupBoxGrade.Text = CurrentClass.Name + " Grade";
                     groupBoxTotals.Text = "Category Totals (%)";
@@ -700,7 +742,11 @@ namespace OpenSourceProject
                 {
                     comboBoxCategory.Items.Remove(CurrentClass.CurrentCategory.Name);
                     CurrentClass.CategoryList.Remove(CurrentClass.CurrentCategory);
-                    --CurrentClass.CurrentCategoryIndex;
+                    if (CurrentClass.CurrentCategoryIndex != 0)
+                    {
+                        --CurrentClass.CurrentCategoryIndex;
+                    }
+                    comboBoxCategory.SelectedIndex = CurrentClass.CurrentCategoryIndex + 1;
                     LoadData();
                     StoreData();
                     UpdateTotals();
