@@ -249,6 +249,7 @@ namespace OpenSourceProject
 
                     //Update the category list
                     UpdateCategoryList();
+                    dataGridView.Enabled = true;
                 }
                 else
                 {
@@ -260,6 +261,7 @@ namespace OpenSourceProject
                     labelPtsPoss.Text = "";
                     labelScore.Text = "";
                     labelPercent.Text = "";
+                    groupBoxTotals.Text = "Category Totals (%)";
                     dataGridView.Rows.Clear();
                     dataGridView.Enabled = false;
                 }
@@ -561,14 +563,25 @@ namespace OpenSourceProject
             Stream stream = new FileStream(CurrentFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
             ClassList = (List<SchoolClass>)formatter.Deserialize(stream);
             stream.Close();
-            LoadData();
-            StoreData();
-            UpdateTotals();
-            UpdateGrade();
-            UpdateCategoryList();
-            UpdateClassList();
-            dataGridView.Enabled = true;
-            comboBoxCategory.Enabled = true;
+            if (CurrentClass.CategoryList.Count != 0)
+            {
+                LoadData();
+                StoreData();
+                UpdateTotals();
+                UpdateGrade();
+                UpdateCategoryList();
+                UpdateClassList();
+                dataGridView.Enabled = true;
+                comboBoxCategory.Enabled = true;
+                groupBoxGrade.Text = CurrentClass.Name + " Grade";
+            }
+            else
+            {
+                groupBoxGrade.Text = CurrentClass.Name + " Grade";
+                UpdateCategoryList();
+                UpdateClassList();
+                comboBoxCategory.Enabled = true;
+            }
         }
 
         //This event is fired when the open dialog is selected
