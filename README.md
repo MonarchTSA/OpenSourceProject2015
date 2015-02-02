@@ -1,4 +1,4 @@
-OpenSourceProject
+OpenSourceProject2015
 =================
 
 To build and run this proeject, you must have .NET v4 installed. Open a command prompt in the root of this repository and run the command 
