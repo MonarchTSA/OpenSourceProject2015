@@ -6,3 +6,5 @@ To build and run this proeject, you must have .NET v4 installed. Open a command 
 >`C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe OpenSourceProject.sln`. 
 
 This will output the program in OpenSourceProject/bin/Debug.
+
+OnFebrurary 21, this project won 3rd at Colorado TSA State.
